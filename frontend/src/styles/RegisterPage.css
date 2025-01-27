@@ -1,0 +1,145 @@
+/* General Styles for the Register Page */
+.register-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Make sure the container takes the full viewport height */
+  padding: 0 20px; /* Add some horizontal padding to prevent the content from touching the sides */
+}
+
+.register-container {
+  background-color: white;
+  padding: 30px 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
+  width: 100%;
+  max-width: 500px; /* Slightly increased max width for better readability */
+  text-align: center;
+  margin-top: 0; /* Remove top margin to avoid it being pushed down */
+}
+
+/* Register Page Heading */
+h2 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 30px; /* Increased space between heading and form */
+}
+
+/* Form Styling */
+.form-group {
+  margin-bottom: 20px; /* Increased margin for better spacing */
+  text-align: left;
+}
+
+label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px; /* Added more padding for a cleaner look */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 15px; /* Increased margin between fields */
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #0078d7; /* Focused state */
+  box-shadow: 0 0 5px rgba(0, 120, 215, 0.5); /* Focus shadow */
+}
+
+/* Custom styling for select fields */
+select {
+  -webkit-appearance: none; /* Remove default dropdown styles */
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2012%2012%22%20xmlns%3D%22http://www.w3.org/2000/svg%22%3E%3Cpath%20fill%3D%22%23ccc%22%20d%3D%22M9%204l-3%204H3V4H9z%22%3E%3C/path%3E%3C/svg%3E%0A');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px 12px;
+}
+
+/* Button Styling */
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #0078d7; /* Blue background */
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #005a8a; /* Darker blue on hover */
+}
+
+/* Success/Error Styling */
+.success {
+  color: green;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 600px) {
+  .register-container {
+    padding: 20px;
+    width: 100%;
+    max-width: 400px; /* Reduce the width on smaller screens */
+  }
+
+  h2 {
+    font-size: 24px; /* Slightly smaller heading for small screens */
+    margin-bottom: 20px; /* Less space between heading and form */
+  }
+
+  .form-group {
+    margin-bottom: 15px; /* Less spacing between form fields */
+  }
+
+  label {
+    font-size: 13px; /* Slightly smaller label font */
+  }
+
+  input, select {
+    font-size: 15px; /* Slightly smaller input text for mobile */
+    padding: 10px;
+  }
+}
+
+/* Specific Customization for Checkboxes */
+input[type="checkbox"] {
+  width: auto;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+input[type="checkbox"]:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+/* Styling for Labels of Checkbox Inputs */
+.checkbox-label {
+  display: inline-block;
+  font-size: 14px;
+  color: #333;
+  margin-top: 5px;
+}

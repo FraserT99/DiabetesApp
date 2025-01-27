@@ -1,0 +1,121 @@
+/* About Page Styles */
+.about-page {
+    font-family: Arial, sans-serif;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+  
+.about-container {
+    background-color: #ffffff; /* White background for content container */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    max-width: 900px;
+    width: 100%;
+    text-align: center;
+}
+
+/* About Header - Remove any background or box shadow */
+.about-header {
+    margin-bottom: 20px;
+    padding: 0;
+    background-color: transparent; /* Ensure no background */
+    border: none; /* Remove any border if it's there */
+}
+
+.about-header h1 {
+    font-size: 2.8rem;
+    color: #004a77; /* Dark Blue color */
+    font-weight: 700;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1); /* Light shadow for contrast */
+    background-color: transparent; /* Ensure no background here */
+    padding: 0; /* Ensure no padding around the text */
+}
+
+.about-header p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    background-color: transparent; /* Ensure no background here */
+}
+
+/* About Content Section */
+.about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* Text Styling */
+.about-text {
+    text-align: left;
+}
+
+.about-text h2 {
+    font-size: 2rem;
+    color: #004a77;
+    margin-bottom: 15px;
+}
+
+.about-text h3 {
+    font-size: 1.6rem;
+    color: #0078d7;
+    margin-bottom: 10px;
+}
+
+.about-text p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.about-text ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    color: #555;
+}
+
+/* Call-to-action Button Styling */
+.cta-container {
+    margin-top: 30px;
+}
+
+.cta-btn {
+    background-color: #0078d7;
+    color: white;
+    padding: 12px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.cta-btn:hover {
+    background-color: #005fa3;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .about-text h2 {
+        font-size: 1.8rem;
+    }
+
+    .about-text p {
+        font-size: 1rem;
+    }
+
+    .cta-btn {
+        font-size: 1rem;
+        padding: 10px 25px;
+    }
+}

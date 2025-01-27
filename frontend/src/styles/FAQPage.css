@@ -1,0 +1,115 @@
+/* General styling for FAQ Page */
+.faq-page {
+    font-family: 'Arial', sans-serif;
+    padding: 40px 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.faq-container {
+    background-color: #ffffff; /* White background for the container */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+    width: 100%;
+    max-width: 1200px; /* Max width for responsiveness */
+    text-align: center;
+}
+
+/* Title styling for FAQ */
+.faq-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #004a77; /* Darker blue for contrast */
+    margin-bottom: 30px;
+    background: linear-gradient(90deg, #004a77, #6db3f2); /* Gradient for the title */
+    
+    /* Standard background-clip property for better compatibility */
+    background-clip: text;
+    
+    /* Webkit background-clip property for older browsers */
+    -webkit-background-clip: text;
+    
+    color: transparent; /* Make the text transparent to reveal the gradient */
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1); /* Light shadow for contrast */
+}
+
+/* Styling for the FAQ list */
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.faq-item {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.faq-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* FAQ question container */
+.faq-question-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.faq-question {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.faq-icon {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #333;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.faq-icon.open {
+    transform: rotate(45deg);
+}
+
+.faq-answer {
+    font-size: 1.2rem;
+    color: #555;
+    line-height: 1.6;
+    margin-top: 15px;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .faq-container {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .faq-title {
+        font-size: 2rem;
+    }
+
+    .faq-question {
+        font-size: 1.5rem;
+    }
+
+    .faq-answer {
+        font-size: 1rem;
+    }
+}

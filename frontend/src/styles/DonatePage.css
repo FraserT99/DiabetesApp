@@ -1,0 +1,86 @@
+/* General styling for Donate Page */
+.donate-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  .donate-container {
+    background-color: rgba(255, 255, 255, 0.8); /* Light translucent background for contrast */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+  }
+  
+  .donate-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #004a77;
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, #004a77, #6db3f2); /* Blue gradient for the title */
+    -webkit-background-clip: text; /* WebKit-prefixed version for compatibility */
+    background-clip: text; /* Standard version */
+    color: transparent;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2); /* Light shadow for text */
+  }
+  
+  .donate-description {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 40px;
+    line-height: 1.6;
+  }
+  
+  .donate-action {
+    margin-top: 20px;
+  }
+  
+  .donate-button {
+    background-color: #004a77; /* Solid blue color */
+    color: #fff;
+    font-size: 1.4rem;
+    padding: 15px 40px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  .donate-button:hover {
+    background-color: #6db3f2; /* Lighter blue on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px); /* Slight lift effect */
+  }
+  
+  .donate-info {
+    margin-top: 30px;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .donate-info p {
+    margin-top: 15px;
+  }
+  
+  @media (max-width: 768px) {
+    .donate-container {
+      padding: 25px; /* Smaller padding on mobile */
+    }
+  
+    .donate-title {
+      font-size: 2.5rem; /* Smaller title on mobile */
+    }
+  
+    .donate-description {
+      font-size: 1rem;
+    }
+  }
+  
