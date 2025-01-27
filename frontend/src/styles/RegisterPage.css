@@ -4,7 +4,9 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh; /* Make sure the container takes the full viewport height */
-  padding: 0 20px; /* Add some horizontal padding to prevent the content from touching the sides */
+  padding: 20px 20px; /* Add padding to prevent the container from touching the sides */
+  margin-top: 50px; /* Add margin at the top to create space between header and form */
+  margin-bottom: 50px; /* Add margin at the bottom to create space between footer and form */
 }
 
 .register-container {
@@ -13,7 +15,7 @@
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
   width: 100%;
-  max-width: 500px; /* Slightly increased max width for better readability */
+  max-width: 800px; /* Increased max-width for much wider container */
   text-align: center;
   margin-top: 0; /* Remove top margin to avoid it being pushed down */
 }

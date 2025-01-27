@@ -65,7 +65,7 @@ const RegisterPage = () => {
   return (
     <main className="register-page">
       <div className="register-container">
-        <h2>Register</h2>
+        <h2>Register an account</h2>
         <form onSubmit={handleRegister}>
           <div className="form-group">
             <label htmlFor="firstName">First Name</label>
@@ -154,7 +154,7 @@ const RegisterPage = () => {
             </select>
           </div>
           <div className="form-group">
-            <label htmlFor="smoking">Smoking</label>
+            <label htmlFor="smoking">Do you smoke? Check the box if "Yes", leave blank if "No"</label>
             <input
               type="checkbox"
               id="smoking"
@@ -163,7 +163,7 @@ const RegisterPage = () => {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="familyHistoryDiabetes">Family History of Diabetes</label>
+            <label htmlFor="familyHistoryDiabetes">Do you have a family history of diabetes? Check the box if "Yes", leave blank if "No"</label>
             <input
               type="checkbox"
               id="familyHistoryDiabetes"

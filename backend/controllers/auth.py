@@ -7,14 +7,13 @@ from models.patient import Patient  # Import Patient model for registration
 
 auth_bp = Blueprint('auth', __name__)
 
-from flask import redirect, url_for
-
+# Route to register a new user
 @auth_bp.route('/api/register', methods=['POST'])
 def register():
     if request.is_json:
         data = request.get_json()
 
-        # Extract required fields
+        # Extract required fields from the incoming JSON data
         first_name = data.get('first_name')
         last_name = data.get('last_name')
         password = data.get('password')
@@ -25,11 +24,11 @@ def register():
         smoking = data.get('smoking')
         family_history_diabetes = data.get('family_history_diabetes', False)
 
-        # Check if required fields are provided
+        # Check if all required fields are present
         if not all([first_name, last_name, password, age, gender, ethnicity, diagnosis is not None, smoking is not None]):
             return jsonify({"success": False, "message": "Missing required fields"}), 400
 
-        # Create Patient entry first
+        # Create the Patient entry first and save it to the database
         new_patient = Patient(
             first_name=first_name,
             last_name=last_name,
@@ -50,7 +49,7 @@ def register():
             antihypertensive_medications=False,
             statins=False,
             antidiabetic_medications=False,
-            medical_checkups_frequency="unknown",
+            medical_checkups_frequency=0.0,
             medication_adherence=0.0,
             health_literacy=0.0,
             latest_blood_pressure_systolic=0,
@@ -61,48 +60,35 @@ def register():
             latest_fasting_blood_sugar=0.0,
         )
 
-        # Add patient to the session and commit to get an ID
+        # Add the patient record to the session and commit to get the patient_id
         db.session.add(new_patient)
         db.session.commit()  # Patient gets its patient_id assigned now
 
-        # Now, generate username using the patient_id
-        username = f"{last_name[:3].lower()}{new_patient.patient_id}"  # Using the actual patient_id after commit
+        # Generate the username using the patient's last name and patient_id
+        username = f"{last_name[:3].lower()}{new_patient.patient_id}"
 
         # Check if the username already exists
         if User.query.filter_by(username=username).first():
             return jsonify({"success": False, "message": "Username already exists"}), 400
 
-        # Now create the user
-        new_user = User(username=username, password=password)  # Pass the plain password
-        new_user.patient_id = new_patient.patient_id  # Link the patient ID to the user
+        # Now, create the user and link it to the patient
+        new_user = User(username=username, password=password)  # Plain-text password passed here
+        new_user.patient_id = new_patient.patient_id  # Link patient_id to the user
 
-        # Commit the user to the database
+        # Try to save the user record to the database
         try:
             db.session.add(new_user)
             db.session.commit()
 
-            # Print full details of the new user and patient in the terminal
-            print(f"[INFO] New User Registered: {new_user.username}")
-            print(f"[INFO] User ID: {new_user.id}, Username: {new_user.username}, Plain-text Password: {password}, Patient ID: {new_user.patient_id}")
-
-            # Now, print the patient's details as requested
-            print(f"[INFO] Patient ID: {new_patient.patient_id}, First Name: {new_patient.first_name}, Last Name: {new_patient.last_name}, "
-                  f"Age: {new_patient.age}, Gender: {new_patient.gender}, Diagnosis: {new_patient.diagnosis}, "
-                  f"Fasting Blood Sugar: {new_patient.latest_fasting_blood_sugar}, Blood Pressure: {new_patient.latest_blood_pressure_systolic}/{new_patient.latest_blood_pressure_diastolic}, "
-                  f"BMI: {new_patient.latest_bmi}, Cholesterol: {new_patient.latest_cholesterol_total}, "
-                  f"HbA1c: {new_patient.latest_hba1c}, Ethnicity: {new_patient.ethnicity}, Smoking: {new_patient.smoking}, "
-                  f"Alcohol Consumption: {new_patient.alcohol_consumption}, Physical Activity: {new_patient.physical_activity}, "
-                  f"Diet Quality: {new_patient.diet_quality}, Sleep Quality: {new_patient.sleep_quality}, "
-                  f"Family History of Diabetes: {new_patient.family_history_diabetes}, Gestational Diabetes: {new_patient.gestational_diabetes}, "
-                  f"PCOS: {new_patient.polycystic_ovary_syndrome}, Previous Pre-Diabetes: {new_patient.previous_pre_diabetes}, "
-                  f"Hypertension: {new_patient.hypertension}, Antihypertensive Medications: {new_patient.antihypertensive_medications}, "
-                  f"Statins: {new_patient.statins}, Antidiabetic Medications: {new_patient.antidiabetic_medications}, "
-                  f"Medical Checkups Frequency: {new_patient.medical_checkups_frequency}, Medication Adherence: {new_patient.medication_adherence}, "
-                  f"Health Literacy: {new_patient.health_literacy}")
+            # Print the key details of the new user and patient
+            print(f"[INFO] New User Registered: User ID: {new_user.id}, Username: {new_user.username}, Patient ID: {new_patient.patient_id}, "
+                  f"First Name: {new_patient.first_name}, Last Name: {new_patient.last_name}, Age: {new_patient.age}, "
+                  f"Gender: {new_patient.gender}, Ethnicity: {new_patient.ethnicity}, Diagnosis: {new_patient.diagnosis}, "
+                  f"Smoking: {new_patient.smoking}, Family History of Diabetes: {new_patient.family_history_diabetes}")
 
             login_user(new_user)  # Log the user in after registration
 
-            # Return the logged-in username
+            # Return success message with the logged-in username
             return jsonify({
                 "success": True,
                 "message": "Registration successful. User logged in.",
@@ -110,13 +96,14 @@ def register():
             })
 
         except Exception as e:
-            db.session.rollback()
+            db.session.rollback()  # Rollback in case of an error
             print(f"[ERROR] {str(e)}")
             return jsonify({"success": False, "message": "An error occurred during registration"}), 500
 
+    # If the request is not JSON, return an error
     return jsonify({"success": False, "message": "Invalid request"}), 400
 
-# Login Route
+# Route for logging in an existing user
 @auth_bp.route('/api/login', methods=['POST'])
 def login():
     if request.is_json:
@@ -124,19 +111,23 @@ def login():
         username = data.get('username')
         password = data.get('password')  # Plain-text password from the request
 
-        print(f"[DEBUG] Attempting login for username: {username}, Plain-text Password: {password}")
+        print(f"[DEBUG] Attempting login for username: {username}")
 
+        # Check if the username exists in the database
         user = User.query.filter_by(username=username).first()
 
         if user:
-            print(f"[DEBUG] Found user: {user.username}, Password Hash: {user.password_hash}")
+            print(f"[DEBUG] Found user: {user.username}")
 
+        # Check if the user exists and if the password matches
         if user and check_password_hash(user.password_hash, password):
             print(f"[DEBUG] Login successful for user: {user.username}")
-            login_user(user)
+            login_user(user)  # Log the user in after successful authentication
             return jsonify({"success": True, "message": "Login successful", "username": user.username})
 
+        # If credentials are invalid, return an error
         print(f"[DEBUG] Invalid credentials provided.")
         return jsonify({"success": False, "message": "Invalid credentials"}), 401
 
+    # If the request is not JSON, return an error
     return jsonify({"success": False, "message": "Invalid request"}), 400
