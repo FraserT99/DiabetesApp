@@ -1,21 +1,21 @@
-/* General styling for FAQ Page */
-.faq-page {
-    font-family: 'Arial', sans-serif;
-    padding: 40px 20px;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* Styling for the FAQ container (Increased height at edges) */
+.faq-container {
+    background: linear-gradient(145deg, #ffffff, #f4f4f4); /* Subtle gradient like the About page */
+    border-radius: 15px; /* Rounded corners for a smoother look */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1), 0 8px 30px rgba(0, 0, 0, 0.1); /* Enhanced shadow for more depth */
+    padding: 30px; /* More internal padding for a cleaner layout */
+    max-width: 1400px; /* Maximum width of the container */
+    width: 100%;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    margin-top: 40px; /* Add space at the top */
+    margin-bottom: 40px; /* Add space at the bottom */
 }
 
-.faq-container {
-    background-color: #ffffff; /* White background for the container */
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
-    width: 100%;
-    max-width: 1200px; /* Max width for responsiveness */
-    text-align: center;
+/* Hover effect for FAQ Container */
+.faq-container:hover {
+    transform: translateY(-10px); /* Slightly lift the container on hover */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15), 0 16px 40px rgba(0, 0, 0, 0.15); /* Enhanced shadow effect */
 }
 
 /* Title styling for FAQ */
@@ -25,38 +25,37 @@
     color: #004a77; /* Darker blue for contrast */
     margin-bottom: 30px;
     background: linear-gradient(90deg, #004a77, #6db3f2); /* Gradient for the title */
-    
-    /* Standard background-clip property for better compatibility */
     background-clip: text;
-    
-    /* Webkit background-clip property for older browsers */
     -webkit-background-clip: text;
-    
-    color: transparent; /* Make the text transparent to reveal the gradient */
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1); /* Light shadow for contrast */
+    color: transparent;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Styling for the FAQ list */
+/* Styling for the FAQ list (always 2 columns except on mobile) */
 .faq-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for larger screens */
+    gap: 15px; /* Reduced space between FAQ items */
     padding: 0 20px;
     box-sizing: border-box;
 }
 
+/* Smaller FAQ item containers */
 .faq-item {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 15px;
+    background-color: #fbfafadc; /* Light gray background for individual question containers */
+    border-radius: 8px; /* Slightly reduced border radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Reduced box-shadow for a subtler effect */
+    padding: 8px 12px; /* Reduced padding for smaller items */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 60px; /* Reduced height for a smaller container */
+    display: flex;
+    flex-direction: column; /* Stack question and answer vertically */
 }
 
+/* Hover effect for FAQ item */
 .faq-item:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* FAQ question container */
@@ -67,49 +66,126 @@
     cursor: pointer;
 }
 
+/* Smaller font for question titles */
 .faq-question {
-    font-size: 1.8rem;
+    font-size: 1.2rem;  /* Smaller font size for questions */
     font-weight: 600;
-    color: #333;
+    color: #004a77;
     margin: 0;
 }
 
+/* Styling for the downwards arrow icon */
 .faq-icon {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #333;
-    border-radius: 50%;
+    display: inline-block;
+    font-size: 1.4rem;  /* Smaller size for the arrow */
+    font-weight: bold;
+    color: #000000;
+    transition: transform 0.3s ease;
+    margin-left: 10px; /* Reduced margin for better alignment */
+}
+
+/* Using the ::before pseudo-element to create the downwards arrow */
+.faq-icon::before {
+    content: '↓'; /* The down arrow character */
     transition: transform 0.3s ease;
 }
 
-.faq-icon.open {
-    transform: rotate(45deg);
+/* When the FAQ item is open, rotate the arrow */
+.faq-icon.open::before {
+    transform: rotate(180deg); /* Rotate the arrow when open */
 }
 
+/* Left-align the FAQ answer text */
 .faq-answer {
+    font-size: 0.9rem;  /* Smaller font size for answers */
+    color: #0078d7;
+    line-height: 1.5;
+    margin-top: 8px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    text-align: left;  /* Left-align the text */
+    padding-left: 15px; /* Add left padding for better readability */
+}
+
+/* Expanding the answer */
+.faq-item.open .faq-answer {
+    max-height: 500px;
+}
+
+/* Additional section below FAQ list */
+.faq-footer {
+    margin-top: 40px;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.faq-footer h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #004a77; /* Matching the color theme */
+    margin-bottom: 15px;
+}
+
+.faq-footer p {
     font-size: 1.2rem;
-    color: #555;
+    color: #333;
     line-height: 1.6;
-    margin-top: 15px;
 }
 
-/* Responsive design */
-@media (max-width: 1024px) {
-    .faq-container {
-        padding: 20px;
-    }
+/* Contact Us Button Styling */
+.contact-btn-container {
+    margin-top: 30px; /* Space between footer and button */
+    display: flex;
+    justify-content: center; /* Center the button */
 }
 
+.contact-btn {
+    background-color: #0078d7;
+    color: white;
+    padding: 12px 24px; /* Larger padding for the button */
+    text-decoration: none;
+    border-radius: 6px; /* Rounded corners */
+    font-size: 1.2rem; /* Slightly larger font size */
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.contact-btn:hover {
+    background-color: #005fa3;
+}
+
+/* Responsive design (switch to 1 column on mobile) */
 @media (max-width: 768px) {
+    .faq-list {
+        grid-template-columns: 1fr; /* 1 column for mobile */
+    }
+
     .faq-title {
         font-size: 2rem;
     }
 
     .faq-question {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
     }
 
     .faq-answer {
+        font-size: 0.9rem;
+    }
+
+    /* Styling for the footer on mobile */
+    .faq-footer h2 {
+        font-size: 1.4rem;
+    }
+
+    .faq-footer p {
         font-size: 1rem;
+    }
+
+    /* Adjust the button size for mobile */
+    .contact-btn {
+        font-size: 1rem;
+        padding: 10px 20px;
     }
 }

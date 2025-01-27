@@ -5,14 +5,14 @@ import Homepage from './components/Homepage';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import Navigation from './components/Navigation';
-import AboutPage from './components/AboutPage';  // Import AboutPage
-import DashboardPage from './components/DashboardPage';  // Import DashboardPage
-import FAQPage from './components/FAQPage';  // Import FAQPage
-import ResourcesPage from './components/ResourcesPage';  // Import ResourcesPage
-import DonatePage from './components/DonatePage';  // Import DonatePage
-import ProfilePage from './components/ProfilePage';  // Import DonatePage
-import RewardsPage from './components/RewardsPage';  // Import DonatePage
-import LeaderboardPage from './components/LeaderboardPage';  // Import DonatePage
+import AboutPage from './components/AboutPage';  
+import DashboardPage from './components/DashboardPage';  
+import FAQPage from './components/FAQPage'; 
+import ResourcesPage from './components/ResourcesPage';  
+import DonatePage from './components/DonatePage';  
+import ProfilePage from './components/ProfilePage';  
+import RewardsPage from './components/RewardsPage';  
+import LeaderboardPage from './components/LeaderboardPage'; 
 
 
 const App = () => {
@@ -30,7 +30,7 @@ const App = () => {
   return (
     <div className="app-container">
       <Router>
-        <Navigation username={username} setUsername={setUsername} /> {/* Pass username and setUsername as props */}
+        <Navigation username={username} setUsername={setUsername} />
         <main>
           <Routes>
             <Route path="/" element={<Homepage />} />
@@ -41,9 +41,9 @@ const App = () => {
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/resources" element={<ResourcesPage />} />
             <Route path="/donate" element={<DonatePage />} />
-            <Route path="/profile" element={<ProfilePage />} /> {/* Add Profile Route */}
-            <Route path="/rewards" element={<RewardsPage />} /> {/* Add Rewards Route */}
-            <Route path="/leaderboard" element={<LeaderboardPage />} /> {/* Add Leaderboards Route */}
+            <Route path="/profile" element={<ProfilePage />} /> 
+            <Route path="/rewards" element={<RewardsPage />} /> 
+            <Route path="/leaderboard" element={<LeaderboardPage />} /> 
           </Routes>
         </main>
         <footer>

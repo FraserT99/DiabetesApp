@@ -60,14 +60,22 @@ header {
 
 .title {
   color: white;
-  font-size: 24px;
+  font-size: 24px; /* Reverted to 24px */
+  font-weight: bold;
+}
+
+.slogan {
+  font-size: 0.8rem; /* Smaller font size */
+  font-style: italic; /* Italicized text */
+  color: #f1f1f1; /* Light color to contrast with the title */
+  margin-left: 5px; /* Space between title and slogan */
 }
 
 /* Container for the "Logged in as" text */
 .username-display {
   color: white;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 16px; /* Reverted to 16px */
   margin-left: 20px; /* Space between the logo/title and the username */
 }
 
@@ -111,7 +119,7 @@ nav ul li a:hover {
   width: auto;
   padding: 10px 20px; /* Ensure padding is consistent */
   cursor: pointer;
-  font-size: 16px;
+  font-size: 16px; /* Reverted to 16px */
   border-radius: 5px;
   display: flex;
   align-items: center; /* Vertically center the text in the button */

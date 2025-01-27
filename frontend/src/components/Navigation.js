@@ -21,10 +21,13 @@ const Navigation = ({ username, setUsername }) => {
 
   return (
     <header>
-      {/* Container for the Logo and Title */}
+      {/* Container for the Logo, Title, and Slogan */}
       <div className="logo-title-container">
         <img src="/logo.png" alt="Logo" className="logo" />
-        <h1 className="title">GlucoTrack</h1>
+        <h1 className="title">
+          GlucoTrack
+          <span className="slogan">Diabetes Made Simple</span> {/* Slogan added here */}
+        </h1>
       </div>
 
       {/* Display username if the user is logged in */}
