@@ -7,3 +7,9 @@ node_modules/
 # Build directories
 build/
 dist/
+
+# Environment variables
+.env
+
+# VS Code settings
+.vscode/
