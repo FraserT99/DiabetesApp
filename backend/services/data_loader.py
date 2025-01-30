@@ -1,7 +1,5 @@
 import os
 import pandas as pd
-import string
-import random
 from faker import Faker  # Import Faker to generate random names
 from models import db  # Import db from models to handle database interactions
 from models.user import User  # Import User model to interact with User table
@@ -119,35 +117,48 @@ def load_data_from_csv():
             patient_ids.add(patient_id)  # Mark this patient as loaded
             loaded_patient_count += 1
 
-            # Commit patients in batches
+            # --- STEP 2: Create User records ---
+            # Generate username for the user
+            username = generate_username(last_name, patient_id)
+
+            # You can choose a default password here
+            default_password = "DefaultPassword123"  # Or you could randomize it as needed
+
+            # Check if the username already exists in the database to prevent conflicts
+            if User.query.filter_by(username=username).first():
+                print(f"[WARNING] Username {username} already exists. Skipping this user.")
+                continue
+
+            # Create the user record and link to the patient
+            new_user = User(
+                username=username,
+                password=default_password,  # Plain-text password is now handled by User model
+                patient_id=new_patient.patient_id
+            )
+
+            # Add the user to the session
+            db.session.add(new_user)
+
+            # Commit patients and users in batches
             if loaded_patient_count >= batch_size:
-                db.session.commit()  # Commit the current batch of patients
-                print(f"[INFO] Committed {batch_size} patients.")
+                db.session.commit()  # Commit the current batch of patients and users
+                print(f"[INFO] Committed {batch_size} patients and users.")
                 loaded_patient_count = 0  # Reset counter for the next batch
 
-        # Commit any remaining patient records that weren't committed in batches
+        # Commit any remaining patient and user records that weren't committed in batches
         if loaded_patient_count > 0:
             db.session.commit()
-            print(f"[INFO] Committed remaining {loaded_patient_count} patients.")
+            print(f"[INFO] Committed remaining {loaded_patient_count} patients and users.")
 
-        print(f"[INFO] Total new patients loaded: {len(patient_ids)}")
+        print(f"[INFO] Total new patients and users loaded: {len(patient_ids)}")
 
     except Exception as e:
         print(f"[ERROR] Failed to load CSV data. Exception: {e}")
 
 
-# Helper functions
-
+# Helper function to generate username
 def generate_username(last_name, patient_id):
     """
     Generates a username using the first 3 letters of the last name and the patient ID.
     """
     return last_name[:3].lower() + str(patient_id)
-
-def generate_random_password(length=12):
-    """
-    Generates a random password containing letters, digits, and symbols.
-    """
-    all_characters = string.ascii_letters + string.digits + string.punctuation
-    password = ''.join(random.choices(all_characters, k=length))
-    return password
