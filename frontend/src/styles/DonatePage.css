@@ -1,86 +1,197 @@
-/* General styling for Donate Page */
 .donate-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-family: 'Arial', sans-serif;
-    color: #fff;
-    padding: 20px;
-  }
-  
-  .donate-container {
-    background-color: rgba(255, 255, 255, 0.8); /* Light translucent background for contrast */
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-    width: 100%;
-    max-width: 800px;
-    text-align: center;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 20px; /* Space from header & footer */
+  background: linear-gradient(180deg, #f9f9f9, #e3f2fd);
+  margin-top: 20px;
+  margin-bottom: 30px;
+  border-radius: 20px; /* Rounded edges */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 1000px; /* Centered and controlled width */
+  width: 90%;
+  text-align: center;
+  border: 3.5px solid #004a77; /* Blue border matching title */
+}
+
+/* Hover Effect */
+.donate-page:hover {
+  transform: translateY(-5px); /* Slight lift effect */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* Deeper shadow on hover */
+}
+
+/* Hero Section */
+.donate-hero {
+  text-align: center;
+  max-width: 900px;
+  margin-bottom: 20px; /* Reduced gap */
+}
+
+.donate-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #004a77; /* Darker blue for contrast */
+  margin-bottom: 0px; /* Reduced space */
+  background: linear-gradient(90deg, #004a77, #6db3f2); /* Gradient for the title */
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.donate-subtitle {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 0px; /* Slightly less spacing */
+}
+
+/* Donation Container */
+.donate-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Donation Card - Added a Blue Border */
+.donate-card {
+  background: white;
+  border-radius: 20px; /* More rounded */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 35px; /* Slightly less padding */
+  max-width: 700px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 3.5px solid #004a77; /* Blue border matching title */
+}
+
+/* Hover Effect on Donation Card */
+.donate-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* Donation Options */
+.donate-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin: 15px 0; /* Less margin */
+}
+
+.donate-option {
+  background: #0078d7;
+  color: white;
+  border: none;
+  padding: 8px 24px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.donate-option:hover {
+  background: #005bb5;
+}
+
+/* Custom Amount */
+.custom-donate {
+  position: relative;
+  margin: 15px 0; /* Less margin */
+}
+
+.custom-donate input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  text-align: right;
+  padding-right: 30px;
+}
+
+.currency {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Donate Button */
+.donate-button {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  width: 100%;
+}
+
+.donate-button:hover {
+  background: #218838;
+}
+
+/* Secure Payment Message */
+.secure-message {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 10px;
+}
+
+/* Why Donate Section */
+.why-donate {
+  margin-top: 15px; /* Slightly closer to donation section */
+  text-align: center;
+  max-width: 700px;
+}
+
+.why-donate h2 {
+  font-size: 2rem;
+  color: #004a77;
+}
+
+.why-donate p {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.why-donate ul {
+  list-style: none;
+  padding: 0;
+}
+
+.why-donate li {
+  font-size: 1.1rem;
+  margin: 12px 0;
+  color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .donate-title {
-    font-size: 3rem;
-    font-weight: 700;
-    color: #004a77;
-    margin-bottom: 20px;
-    background: linear-gradient(90deg, #004a77, #6db3f2); /* Blue gradient for the title */
-    -webkit-background-clip: text; /* WebKit-prefixed version for compatibility */
-    background-clip: text; /* Standard version */
-    color: transparent;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2); /* Light shadow for text */
+      font-size: 2.3rem;
   }
-  
-  .donate-description {
-    font-size: 1.2rem;
-    color: #333;
-    margin-bottom: 40px;
-    line-height: 1.6;
+
+  .donate-subtitle {
+      font-size: 1.1rem;
   }
-  
-  .donate-action {
-    margin-top: 20px;
+
+  .donate-card {
+      width: 95%;
+      padding: 30px;
   }
-  
+
   .donate-button {
-    background-color: #004a77; /* Solid blue color */
-    color: #fff;
-    font-size: 1.4rem;
-    padding: 15px 40px;
-    border-radius: 30px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+      font-size: 1.1rem;
   }
-  
-  .donate-button:hover {
-    background-color: #6db3f2; /* Lighter blue on hover */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    transform: translateY(-3px); /* Slight lift effect */
+
+  .why-donate {
+      max-width: 90%;
   }
-  
-  .donate-info {
-    margin-top: 30px;
-    font-size: 1rem;
-    color: #333;
-  }
-  
-  .donate-info p {
-    margin-top: 15px;
-  }
-  
-  @media (max-width: 768px) {
-    .donate-container {
-      padding: 25px; /* Smaller padding on mobile */
-    }
-  
-    .donate-title {
-      font-size: 2.5rem; /* Smaller title on mobile */
-    }
-  
-    .donate-description {
-      font-size: 1rem;
-    }
-  }
-  
+}

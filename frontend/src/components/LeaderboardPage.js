@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/LeaderboardPage.css'; // Add this file for custom styles
+import '../styles/LeaderboardPage.css';
 
 const Leaderboards = () => {
   const leaderboardData = [
@@ -11,34 +11,19 @@ const Leaderboards = () => {
   ];
 
   const leaderboards = [
-    {
-      title: 'Top 5 Overall',
-      data: leaderboardData,
-    },
-    {
-      title: 'Top 5 Steps',
-      data: leaderboardData,
-    },
-    {
-      title: 'Top 5 Active Days',
-      data: leaderboardData,
-    },
-    {
-      title: 'Top 5 Challenges',
-      data: leaderboardData,
-    },
+    { title: 'Top 5 Overall', data: leaderboardData },
+    { title: 'Top 5 Steps', data: leaderboardData },
+    { title: 'Top 5 Active Days', data: leaderboardData },
+    { title: 'Top 5 Challenges', data: leaderboardData },
   ];
 
-  // Initialize filter state for each leaderboard
-  const [filters, setFilters] = useState(
-    leaderboards.map(() => 'All Time') // Default filter for each leaderboard
-  );
+  const [filters, setFilters] = useState(leaderboards.map(() => 'All Time'));
 
   const handleFilterChange = (e, index) => {
     const selectedFilter = e.target.value;
     const updatedFilters = [...filters];
     updatedFilters[index] = selectedFilter;
-    setFilters(updatedFilters); // Update only the specific leaderboard's filter
+    setFilters(updatedFilters);
   };
 
   return (
@@ -52,8 +37,8 @@ const Leaderboards = () => {
               <div className="leaderboard-header">
                 <h3>{leaderboard.title}</h3>
                 <select
-                  value={filters[index]} // Use individual filter for each leaderboard
-                  onChange={(e) => handleFilterChange(e, index)} // Handle filter change for each
+                  value={filters[index]}
+                  onChange={(e) => handleFilterChange(e, index)}
                   className="filter-dropdown"
                 >
                   <option value="All Time">All Time</option>
@@ -73,7 +58,11 @@ const Leaderboards = () => {
                 <tbody>
                   {leaderboard.data.map((user) => (
                     <tr key={user.rank}>
-                      <td>{user.rank}</td>
+                      <td>
+                        <span className={`rank-badge rank-${user.rank}`}>
+                          {user.rank}
+                        </span>
+                      </td>
                       <td>{user.name}</td>
                       <td>{user.score}</td>
                     </tr>

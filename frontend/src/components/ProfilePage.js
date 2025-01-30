@@ -15,7 +15,7 @@ const Profile = () => {
         <div className="profile-header">
           <div className="profile-picture">
             <img 
-              src="/default-profile-pic.png" 
+              src="/default-profile-picture.png" 
               alt="Profile" 
               className="profile-img" 
             />
@@ -58,9 +58,9 @@ const Profile = () => {
           ) : (
             <div className="info-section">
               <h3>Personal Information</h3>
-              <p>Name: John Doe</p>
-              <p>Email: johndoe@example.com</p>
-              <p>Member since: January 2022</p>
+              <p><span>Name:</span> John Doe</p>
+              <p><span>Email:</span> johndoe@example.com</p>
+              <p><span>Member since:</span> January 2022</p>
             </div>
           )}
         </div>

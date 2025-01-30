@@ -1,70 +1,79 @@
 /* Homepage.css */
 
-/* Center content on the homepage */
 .homepage-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two columns layout */
-    gap: 20px; /* Space between boxes */
-    justify-items: center; /* Center items horizontally */
-    align-items: start; /* Align items to the top */
-    text-align: center;
-    padding: 20px;
-    max-width: 1200px; /* Limit container width */
-    margin: 40px auto; /* Center the container horizontally */
-  }
-  
-  /* Individual Box Style */
-  .box {
-    background-color: white;
-    padding: 10px; /* Padding inside the box */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    width: 100%; /* Make the box take up full available space */
-    max-width: 500px; /* Increased max-width for bigger boxes */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* Align items to the top */
-    height: 160px; /* Fixed height for all boxes */
-    box-sizing: border-box; /* Ensure padding is inside the box's height */
-  }
-  
-  /* Header inside Box */
-  .box h3 {
-    color: #0078d7; /* Blue header */
-    font-size: 22px;
-    margin: 0; /* Remove margin to avoid extra space */
-    flex-shrink: 0; /* Prevent the header from shrinking */
-  }
-  
-  /* Paragraph inside Box */
-  .box p {
-    color: #555;
-    font-size: 16px;
-    line-height: 1.6;
-    margin: 0; /* No margin around the paragraph */
-    padding-bottom: 10px; /* Small gap below the paragraph */
-  }
-  
-  /* Button inside Box */
-  .box button {
-    background-color: #0078d7;
-    color: white;
-    border: none;
-    padding: 8px 16px; /* Reduced padding to make the button smaller */
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    align-self: center; /* Center button horizontally */
-    margin-top: 5px; /* Reduced gap above the button to bring it closer to the paragraph */
-    width: 250px; /* Button width will automatically adjust based on content */
-  }
-  
-  .box button:hover {
-    background-color: #005bb5; /* Darker blue on hover */
-  }
-  
-  /* Ensuring proper spacing between the sections */
-  .homepage-container {
-    margin-top: 40px; /* Space between the container and other content above */
-  }
-  
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns layout */
+  gap: 20px; /* Space between boxes */
+  justify-items: center; /* Center items horizontally */
+  align-items: start; /* Align items to the top */
+  text-align: center;
+  padding: 20px;
+  max-width: 1200px; /* Limit container width */
+  margin: 40px auto; /* Center the container horizontally */
+}
+
+/* Individual Box Style */
+.box {
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 160px;
+  box-sizing: border-box;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 3.5px solid #004a77; /* Blue border matching title */
+}
+
+/* Hover Effect */
+.box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Header inside Box */
+.box h3 {
+  color: #0078d7;
+  font-size: 22px;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+/* Paragraph inside Box */
+.box p {
+  color: #555;
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0;
+  padding-bottom: 10px;
+}
+
+/* Button inside Box */
+.box button {
+  background-color: #0078d7;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  align-self: center;
+  margin-top: 5px;
+  width: 250px;
+  transition: background 0.3s, transform 0.2s ease;
+}
+
+/* Button Hover Effect */
+.box button:hover {
+  background-color: #005bb5;
+  transform: scale(1.05);
+}
+
+/* Ensuring proper spacing between the sections */
+.homepage-container {
+  margin-top: 40px;
+}

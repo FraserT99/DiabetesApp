@@ -1,81 +1,127 @@
-/* src/styles/LoginPage.css */
-
 /* General Styles for the Login Page */
 .login-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Make sure the container takes the full viewport height */
-    padding: 0 20px; /* Add some horizontal padding to prevent the content from touching the sides */
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full height for vertical centering */
+  padding: 20px;
+}
+
+.login-container {
+  background-color: white;
+  padding: 40px 50px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
+  width: 100%;
+  max-width: 400px; /* Width limit for better design on mobile */
+  text-align: center;
+  border: 3.5px solid #004a77; /* Blue border for container */
+}
+
+h2 {
+  font-size: 2rem;
+  color: #004a77;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 8px;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  border: 3px solid #004a77;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px; /* Reduced margin to bring the links closer */
+  outline: none;
+  transition: all 0.3s ease-in-out; /* Smooth transition for focus effect */
+}
+
+/* Specific Input Fields Styling */
+#username {
+  border: 3px solid #004a77; /* Explicitly apply the border to the username field */
+}
+
+#password {
+  border: 3px solid #004a77; /* Explicitly apply the border to the password field */
+}
+
+input:focus {
+  border-color: #0078d7; /* Focused border */
+  box-shadow: 0 0 5px rgba(0, 120, 215, 0.5); /* Focus shadow */
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #0078d7, #005a8a); /* Gradient background */
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #005a8a; /* Darker blue on hover */
+}
+
+/* Forgot Links Styling */
+.forgot-links {
+  margin-top: 0; /* Removed margin to make them closer to the input fields */
+  text-align: left;
+}
+
+.forgot-link {
+  font-size: 14px;
+  color: #004a77;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 5px; /* Reduced space between the links */
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+/* Error and Success Messages Styling */
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+.success {
+  color: green;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
   .login-container {
-    background-color: white;
-    padding: 30px 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
-    width: 100%;
-    max-width: 450px; /* Set a max width to avoid stretching */
-    text-align: center;
-    margin-top: 0; /* Remove top margin to avoid it being pushed down */
+    padding: 20px;
+    max-width: 350px;
   }
-  
+
   h2 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
+    font-size: 1.8rem;
   }
-  
-  /* Form Styling */
-  .form-group {
-    margin-bottom: 20px; /* Increased margin for better spacing */
-    text-align: left;
-  }
-  
-  label {
-    font-size: 14px;
-    font-weight: bold;
-    color: #333;
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input {
-    width: 100%;
-    padding: 12px; /* Added more padding for a cleaner look */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 15px; /* Increased margin between fields */
-  }
-  
-  input:focus {
-    outline: none;
-    border-color: #0078d7; /* Focused state */
-    box-shadow: 0 0 5px rgba(0, 120, 215, 0.5); /* Focus shadow */
-  }
-  
-  button {
-    width: 100%;
+
+  input, button {
     padding: 12px;
-    background-color: #0078d7; /* Blue background */
-    color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
   }
-  
-  button:hover {
-    background-color: #005a8a; /* Darker blue on hover */
-  }
-  
-  /* Error Styling (if needed later) */
-  .error-message {
-    color: red;
-    font-size: 14px;
-    margin-top: 10px;
-  }
-  
+}

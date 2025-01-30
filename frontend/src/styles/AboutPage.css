@@ -17,6 +17,7 @@
     width: 100%;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    border: 3.5px solid #004a77; /* Blue border matching title */
 }
 
 /* Hover effect for About Container */
@@ -34,12 +35,15 @@
 }
 
 .about-header h1 {
-    font-size: 1.6rem; /* Smaller font size */
-    color: #004a77;
+    font-size: 2.5rem;
     font-weight: 700;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Lighter shadow */
-    background-color: transparent;
-    padding: 0;
+    color: #004a77; /* Darker blue for contrast */
+    margin-bottom: 1px;
+    background: linear-gradient(90deg, #004a77, #6db3f2); /* Gradient for the title */
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 .about-header p {

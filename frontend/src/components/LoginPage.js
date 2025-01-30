@@ -50,7 +50,12 @@ const LoginPage = ({ setUsername }) => {
               required
               placeholder="Enter your username"
             />
+            {/* Forgot Username Link */}
+            <div className="forgot-links">
+              <a href="/forgot-username" className="forgot-link">Forgot your username?</a>
+            </div>
           </div>
+
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <input
@@ -61,9 +66,16 @@ const LoginPage = ({ setUsername }) => {
               required
               placeholder="Enter your password"
             />
+            {/* Forgot Password Link */}
+            <div className="forgot-links">
+              <a href="/forgot-password" className="forgot-link">Forgot your password?</a>
+            </div>
           </div>
+
           <button type="submit" className="login-btn">Login</button>
         </form>
+
+        {/* Error and Success Messages */}
         {error && <div className="error">{error}</div>}
         {success && <div className="success">{success}</div>}
       </div>

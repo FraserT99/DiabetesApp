@@ -3,10 +3,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Make sure the container takes the full viewport height */
-  padding: 20px 20px; /* Add padding to prevent the container from touching the sides */
-  margin-top: 50px; /* Add margin at the top to create space between header and form */
-  margin-bottom: 50px; /* Add margin at the bottom to create space between footer and form */
+  min-height: 100vh; /* Ensure the container takes the full viewport height */
+  padding: 5px 5px; /* Padding to prevent the container from touching the sides */
+  margin-top: 20px; /* Margin at the top to create space between header and form */
+  margin-bottom: 20px; /* Margin at the bottom to create space between footer and form */
 }
 
 .register-container {
@@ -15,9 +15,16 @@
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
   width: 100%;
-  max-width: 800px; /* Increased max-width for much wider container */
+  max-width: 800px; /* Increased max-width for a wider container */
   text-align: center;
-  margin-top: 0; /* Remove top margin to avoid it being pushed down */
+  margin-top: 0; /* No top margin to avoid it being pushed down */
+  border: 3.5px solid #004a77; /* Blue border matching title */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease; /* Smooth transition */
+}
+
+.register-container:hover {
+  transform: translateY(-5px); /* Hover effect to lift container */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Subtle shadow effect */
 }
 
 /* Register Page Heading */
@@ -41,14 +48,45 @@ label {
   margin-bottom: 5px;
 }
 
+/* Apply blue border to specific fields (first name, last name, password, and age) */
+input[name="firstName"], 
+input[name="lastName"], 
+input[name="password"], 
+input[name="age"], 
+input#firstName, 
+input#lastName, 
+input#password, 
+input#age {
+  border: 3px solid #004a77; /* Blue border for specific fields */
+}
+
+/* General Input, Select, and Textarea Fields (apply border if it's not already overridden) */
 input, select, textarea {
   width: 100%;
-  padding: 12px; /* Added more padding for a cleaner look */
-  border: 1px solid #ccc;
+  padding: 12px; /* More padding for a cleaner look */
   border-radius: 4px;
   font-size: 16px;
   color: #333;
   margin-bottom: 15px; /* Increased margin between fields */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions for focus state */
+}
+
+/* Focused State for Input Fields */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #0078d7; /* Focused state color */
+  box-shadow: 0 0 5px rgba(0, 120, 215, 0.5); /* Focus shadow */
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px; /* More padding for a cleaner look */
+  border: 3px solid #004a77; /* Blue border matching title */
+  border-radius: 4px;
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 15px; /* Increased margin between fields */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions for focus state */
 }
 
 input:focus, select:focus, textarea:focus {
@@ -83,6 +121,7 @@ button {
 
 button:hover {
   background-color: #005a8a; /* Darker blue on hover */
+  transform: translateY(-2px); /* Slight lift effect */
 }
 
 /* Success/Error Styling */
@@ -130,6 +169,7 @@ input[type="checkbox"] {
   width: auto;
   margin-right: 10px;
   display: inline-block;
+  vertical-align: middle;
 }
 
 input[type="checkbox"]:focus {
@@ -144,4 +184,5 @@ input[type="checkbox"]:focus {
   font-size: 14px;
   color: #333;
   margin-top: 5px;
+  vertical-align: middle;
 }

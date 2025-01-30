@@ -8,8 +8,9 @@
     width: 100%;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
-    margin-top: 40px; /* Add space at the top */
+    margin-top: 20px; /* Add space at the top */
     margin-bottom: 40px; /* Add space at the bottom */
+    border: 3.5px solid #004a77; /* Blue border matching title */
 }
 
 /* Hover effect for FAQ Container */
@@ -50,6 +51,7 @@
     min-height: 60px; /* Reduced height for a smaller container */
     display: flex;
     flex-direction: column; /* Stack question and answer vertically */
+    border: 3.5px solid #004a77; /* Blue border matching title */
 }
 
 /* Hover effect for FAQ item */

@@ -1,72 +1,96 @@
 import React from 'react';
 import '../styles/ResourcesPage.css';
 
-const ResourcesPage = () => {
-  const resources = [
+const resources = {
+  education: [
     {
       title: 'American Diabetes Association',
       url: 'https://www.diabetes.org/',
       description: 'Official website offering resources, educational materials, and support for individuals with diabetes.',
-      icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/ADA_logo.svg/1200px-ADA_logo.svg.png'
+      icon: '/images/ADA.png'
     },
     {
       title: 'CDC Diabetes Resources',
       url: 'https://www.cdc.gov/diabetes/',
       description: 'The CDC’s comprehensive guide to managing diabetes, including prevention and care strategies.',
-      icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/CDC_logo.svg/1200px-CDC_logo.svg.png'
-    },
+      icon: '/images/CDC.png'
+    }
+  ],
+  support: [
     {
       title: 'Diabetes.co.uk',
       url: 'https://www.diabetes.co.uk/',
       description: 'UK-based diabetes community offering support, educational resources, and an online diabetes management program.',
-      icon: 'https://www.diabetes.co.uk/favicon.ico'
-    },
-    // Additional example resources
-    {
-      title: 'Example Resource 1',
-      url: 'https://www.example.com/',
-      description: 'This is an example resource. Replace this with actual resource information.',
-      icon: 'https://via.placeholder.com/40'
+      icon: '/images/DUK.png'
     },
     {
-      title: 'Example Resource 2',
-      url: 'https://www.example2.com/',
-      description: 'Another placeholder resource, useful for testing. Replace with real content.',
-      icon: 'https://via.placeholder.com/40'
-    },
-    {
-      title: 'Example Resource 3',
-      url: 'https://www.example3.com/',
-      description: 'An additional example. This is a placeholder and should be replaced later.',
-      icon: 'https://via.placeholder.com/40'
+      title: 'Breakthrough T1D',
+      url: 'https://www.breakthrought1d.org/',
+      description: 'Leading global organization funding Type 1 diabetes research, offering support and advocacy.',
+      icon: '/images/Breakthrough.png'
     }
-  ];
+  ],
+  tools: [
+    {
+      title: 'GlucoTrack App',
+      url: 'http://localhost:3000/',
+      description: 'A modern diabetes tracking app that helps users monitor blood glucose levels and manage their condition effectively.',
+      icon: '/images/logo.png'
+    },
+    {
+      title: 'MySugr App',
+      url: 'https://www.mysugr.com/',
+      description: 'A diabetes logbook app designed to simplify blood sugar tracking with smart insights and reminders.',
+      icon: '/images/MySugr.png'
+    }
+  ]
+};
 
+const ResourcesPage = () => {
   return (
     <div className="resources-page">
-      <div className="resources-container"> {/* New container wrapping the title and resource cards */}
+      <div className="resources-container">
+        {/* Title and Subtitle */}
         <h1 className="resources-title">Diabetes Resources</h1>
-        <div className="resources-list">
-          {resources.map((resource, index) => (
-            <div className="resource-card" key={index}>
-              <div className="resource-icon-container">
-                <img className="resource-icon" src={resource.icon} alt={resource.title} />
-              </div>
-              <div className="resource-content">
-                <h2 className="resource-title">{resource.title}</h2>
-                <p className="resource-description">{resource.description}</p>
-              </div>
-              <a
-                href={resource.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="resource-link"
-              >
-                Visit Website
-              </a>
+        <h2 className="resources-subtitle">Your Guide to Trusted Diabetes Information</h2>
+        <p className="resources-intro">
+          We’ve curated a list of reliable resources to help you stay informed about diabetes management, treatment, and support communities.
+        </p>
+
+        {/* Loop through categories */}
+        {Object.entries(resources).map(([category, items]) => (
+          <div key={category} className="resource-category">
+            <h3 className="category-title">{category.charAt(0).toUpperCase() + category.slice(1)} Resources</h3>
+            <div className="resources-list">
+              {items.map((resource, index) => (
+                <div className="resource-card" key={index}>
+                  <div className="resource-icon-container">
+                    <img className="resource-icon" src={resource.icon} alt={resource.title} />
+                  </div>
+                  <div className="resource-content">
+                    <h2 className="resource-title">{resource.title}</h2>
+                    <p className="resource-description">{resource.description}</p>
+                  </div>
+                  <a
+                    href={resource.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="resource-link"
+                  >
+                    Visit Website
+                  </a>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
+
+        {/* Suggest a Resource Section */}
+        <section className="resources-footer">
+          <h2>Know a Great Resource?</h2>
+          <p>If you have a valuable diabetes-related resource that should be featured here, let us know!</p>
+          <button className="suggest-resource-btn">Suggest a Resource</button>
+        </section>
       </div>
     </div>
   );
