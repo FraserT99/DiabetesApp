@@ -1,9 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
 
-# Initialize the database instance
+#Initialise the database instance
 db = SQLAlchemy()
 
-# Import models after db initialization
+#Import models after db initialisation
 from .user import User
+from .patientChallenge import PatientChallenge
+from .challenge import Challenge
 from .patient import Patient
-from .health_history import HealthHistory  # Import HealthHistory model
+from .health_history import HealthHistory  

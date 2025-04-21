@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import '../styles/RegisterPage.css'; // Import the styles for this page
+import { useNavigate } from 'react-router-dom';
+import '../styles/RegisterPage.css';
 
 const RegisterPage = () => {
   const [password, setPassword] = useState('');
@@ -13,12 +13,62 @@ const RegisterPage = () => {
   const [diagnosis, setDiagnosis] = useState('');
   const [smoking, setSmoking] = useState(false);
   const [familyHistoryDiabetes, setFamilyHistoryDiabetes] = useState(false);
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const navigate = useNavigate(); // Using useNavigate to handle navigation
+  const navigate = useNavigate();
+
+  // Validation Rules 
+  const validateName = (name) => /^[A-Za-z]{2,50}$/.test(name);
+  const validatePassword = (password) =>
+    /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/.test(password);
+  const validateEmail = (email) =>
+    /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email);
+  const validatePhone = (phone) =>
+    /^\+?\d{10,15}$/.test(phone);
+  const validateAge = (age) =>
+    Number.isInteger(Number(age)) && age >= 18 && age <= 120;
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setError('');
+    setSuccess('');
+
+    if (!firstName || !lastName || !email || !password || !age || !gender || !ethnicity || !diagnosis || !phone) {
+      setError('Please fill in all required fields.');
+      return;
+    }
+
+    if (!validateName(firstName)) {
+      setError('First name must contain only letters (2–50 characters).');
+      return;
+    }
+
+    if (!validateName(lastName)) {
+      setError('Last name must contain only letters (2–50 characters).');
+      return;
+    }
+
+    if (!validatePassword(password)) {
+      setError('Password must be 8–20 characters and contain at least one letter and one number.');
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setError('Invalid email format.');
+      return;
+    }
+
+    if (!validatePhone(phone)) {
+      setError('Phone number must be 10–15 digits and may start with +.');
+      return;
+    }
+
+    if (!validateAge(age)) {
+      setError('Please enter a valid age between 18 and 120.');
+      return;
+    }
 
     try {
       const response = await axios.post('http://127.0.0.1:5000/api/register', {
@@ -30,14 +80,16 @@ const RegisterPage = () => {
         ethnicity,
         diagnosis,
         smoking,
-        family_history_diabetes: familyHistoryDiabetes
+        family_history_diabetes: familyHistoryDiabetes,
+        email,
+        phone_number: phone
       });
 
       if (response.data.success) {
-        // Handle successful registration
-        setSuccess(response.data.message);
+        setSuccess('Registration successful! Redirecting to login...');
         setError('');
-        // Optionally, clear the input fields
+
+        //Clear form
         setPassword('');
         setFirstName('');
         setLastName('');
@@ -47,17 +99,21 @@ const RegisterPage = () => {
         setDiagnosis('');
         setSmoking(false);
         setFamilyHistoryDiabetes(false);
-        
-        // Redirect to login page or homepage (adjust the path as needed)
+        setEmail('');
+        setPhone('');
+
+        //Redirect after delay
         setTimeout(() => {
-          navigate('/login'); // Redirect to login page after registration
-        }, 2000); // Redirect after 2 seconds
+          setSuccess('');
+          navigate('/login');
+        }, 1500);
       } else {
-        setError(response.data.message);
+        setError(response.data.message || 'Registration failed.');
         setSuccess('');
       }
     } catch (err) {
-      setError('An error occurred. Please try again.');
+      const msg = err?.response?.data?.message || 'Something went wrong during registration.';
+      setError(msg);
       setSuccess('');
     }
   };
@@ -66,118 +122,85 @@ const RegisterPage = () => {
     <main className="register-page">
       <div className="register-container">
         <h2>Register an account</h2>
-        <form onSubmit={handleRegister}>
-          <div className="form-group">
-            <label htmlFor="firstName">First Name</label>
-            <input
-              type="text"
-              id="firstName"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              required
-              placeholder="Enter your first name"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="lastName">Last Name</label>
-            <input
-              type="text"
-              id="lastName"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              required
-              placeholder="Enter your last name"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              placeholder="Enter your password"
-            />
-          </div>
-          {/* Additional Fields for Patient Information */}
-          <div className="form-group">
-            <label htmlFor="age">Age</label>
-            <input
-              type="number"
-              id="age"
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
-              required
-              placeholder="Enter your age"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="gender">Gender</label>
-            <select
-              id="gender"
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-              required
-            >
-              <option value="">Select Gender</option>
-              <option value="0">Male</option>
-              <option value="1">Female</option>
-            </select>
-          </div>
-          <div className="form-group">
-            <label htmlFor="ethnicity">Ethnicity</label>
-            <select
-              id="ethnicity"
-              value={ethnicity}
-              onChange={(e) => setEthnicity(e.target.value)}
-              required
-            >
-              <option value="">Select Ethnicity</option>
-              <option value="0">Caucasian</option>
-              <option value="1">African American</option>
-              <option value="2">Asian</option>
-              <option value="3">Other</option>
-            </select>
-          </div>
-          <div className="form-group">
-            <label htmlFor="diagnosis">Diagnosis</label>
-            <select
-              id="diagnosis"
-              value={diagnosis}
-              onChange={(e) => setDiagnosis(e.target.value)}
-              required
-            >
-              <option value="">Select Diagnosis</option>
-              <option value="1">Diabetic</option>
-              <option value="0">Non-Diabetic</option>
-            </select>
-          </div>
-          <div className="form-group">
-            <label htmlFor="smoking">Do you smoke? Check the box if "Yes", leave blank if "No"</label>
-            <input
-              type="checkbox"
-              id="smoking"
-              checked={smoking}
-              onChange={(e) => setSmoking(e.target.checked)}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="familyHistoryDiabetes">Do you have a family history of diabetes? Check the box if "Yes", leave blank if "No"</label>
-            <input
-              type="checkbox"
-              id="familyHistoryDiabetes"
-              checked={familyHistoryDiabetes}
-              onChange={(e) => setFamilyHistoryDiabetes(e.target.checked)}
-            />
+        <form onSubmit={handleRegister} className="register-form">
+          <div className="form-grid">
+            <div className="form-group">
+              <label>First Name</label>
+              <input value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="Enter your first name" />
+            </div>
+
+            <div className="form-group">
+              <label>Last Name</label>
+              <input value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Enter your last name" />
+            </div>
+
+            <div className="form-group">
+              <label>Password</label>
+              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password" />
+            </div>
+
+            <div className="form-group">
+              <label>Email Address</label>
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email" />
+            </div>
+
+            <div className="form-group">
+              <label>Phone Number</label>
+              <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Enter your phone number" />
+            </div>
+
+            <div className="form-group">
+              <label>Age</label>
+              <input type="number" value={age} onChange={(e) => setAge(e.target.value)} placeholder="Enter your age" />
+            </div>
+
+            <div className="form-group">
+              <label>Gender</label>
+              <select value={gender} onChange={(e) => setGender(e.target.value)}>
+                <option value="">Select Gender</option>
+                <option value="0">Male</option>
+                <option value="1">Female</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label>Ethnicity</label>
+              <select value={ethnicity} onChange={(e) => setEthnicity(e.target.value)}>
+                <option value="">Select Ethnicity</option>
+                <option value="0">Caucasian</option>
+                <option value="1">African American</option>
+                <option value="2">Asian</option>
+                <option value="3">Other</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label>Diagnosis</label>
+              <select value={diagnosis} onChange={(e) => setDiagnosis(e.target.value)}>
+                <option value="">Select Diagnosis</option>
+                <option value="1">Diabetic</option>
+                <option value="0">Non-Diabetic</option>
+              </select>
+            </div>
+
+            <div className="form-checkbox">
+              <input type="checkbox" id="smoking" checked={smoking} onChange={(e) => setSmoking(e.target.checked)} />
+              <label htmlFor="smoking">Do you smoke?</label>
+            </div>
+
+            <div className="form-checkbox">
+              <input type="checkbox" id="familyHistoryDiabetes" checked={familyHistoryDiabetes} onChange={(e) => setFamilyHistoryDiabetes(e.target.checked)} />
+              <label htmlFor="familyHistoryDiabetes">Family history of diabetes?</label>
+            </div>
           </div>
 
-          <button type="submit" className="register-btn">Register</button>
+          <div className="form-submit">
+            <button type="submit">Register</button>
+          </div>
+
+          {error && <p className="error">{error}</p>}
+          {success && <p className="success">{success}</p>}
         </form>
-
-        {/* Display success or error message */}
-        {error && <div className="error">{error}</div>}
-        {success && <div className="success">{success}</div>}
       </div>
     </main>
   );

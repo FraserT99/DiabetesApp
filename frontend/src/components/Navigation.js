@@ -1,22 +1,22 @@
 import React, { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Using Link for navigation
+import { Link, useNavigate } from 'react-router-dom'; //Using Link for navigation
 
 const Navigation = ({ username, setUsername }) => {
-  const navigate = useNavigate(); // For programmatic navigation
+  const navigate = useNavigate(); //For programmatic navigation
 
-  // Initialize username from localStorage when the component mounts
+  //Initialise username from localStorage when the component mounts
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
     if (storedUsername) {
-      setUsername(storedUsername);  // Set the username if present in localStorage
+      setUsername(storedUsername);  //Set the username if present in localStorage
     }
   }, [setUsername]);
 
-  // Handle logout
+  //Handle logout
   const handleLogout = () => {
-    localStorage.removeItem('username'); // Remove username from localStorage
-    setUsername(null); // Clear the username state
-    navigate('/login'); // Redirect to the login page
+    localStorage.removeItem('username'); //Remove username from localStorage
+    setUsername(null); //Clear the username state
+    navigate('/login'); //Redirect to the login page
   };
 
   return (
@@ -61,15 +61,6 @@ const Navigation = ({ username, setUsername }) => {
             <>
               <li>
                 <Link to="/dashboard">Dashboard</Link>
-              </li>
-              <li>
-                <Link to="/leaderboard">Leaderboards</Link>
-              </li>
-              <li>
-                <Link to="/rewards">Rewards</Link>
-              </li>
-              <li>
-                <Link to="/profile">Profile</Link>
               </li>
             </>
           )}

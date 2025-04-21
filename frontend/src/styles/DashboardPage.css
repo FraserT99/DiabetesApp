@@ -1,0 +1,36 @@
+.dashboard-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 2500px;
+  width: 100%;
+  text-align: center;
+}
+
+.dashboard-page iframe {
+  width: 100%;
+  height: 600px;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .dashboard-page {
+      padding: 15px;
+  }
+  
+  .dashboard-page iframe {
+      height: 500px;
+  }
+  
+  .dashboard-title {
+      font-size: 2rem;
+  }
+
+  .dashboard-subtitle {
+      font-size: 1rem;
+      margin-top: 5px;
+  }
+}

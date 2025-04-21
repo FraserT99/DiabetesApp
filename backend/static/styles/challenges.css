@@ -1,0 +1,193 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #5ab1e8, #0078d7);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    border: 3.5px solid #004a77;
+}
+
+.content-container {
+    background-color: transparent;
+    padding: 20px;
+    margin-bottom: 127px;
+}
+
+.challenge-section-title {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    padding-bottom: 5px;
+    text-shadow: 2px 2px 4px black;
+}
+
+.challenge-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 10px;
+}
+
+.challenge-card,
+.challenge-completed-gold {
+    width: 100%;
+    max-width: 330px;
+    height: 83px;
+    background: white;
+    border-radius: 10px;
+    border: 3px solid #004a77;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    overflow: hidden;
+    font-size: 10px;
+    text-align: left; 
+    line-height: 1.1;
+}
+
+.challenge-completed-gold {
+    background: linear-gradient(145deg, rgba(250, 215, 70, 0.9), rgba(250, 230, 120, 0.85), rgba(240, 200, 50, 0.9));
+    border: 3px solid black;
+    box-shadow: 0px 0px 10px rgba(250, 215, 70, 0.8);
+    color: black !important;
+}
+
+.challenge-completed-gold:hover,
+.challenge-card:hover {
+    transform: scale(1.01);
+    transition: transform 0.2s ease-in-out;
+}
+
+@keyframes sparkle-glow {
+    0% {
+        box-shadow: 0 0 8px rgba(255, 255, 0, 0.6), 0 0 12px rgba(255, 255, 0, 0.6);
+        border-color: #fff200;
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(255, 255, 0, 1), 0 0 25px rgba(255, 255, 0, 0.9);
+        border-color: #fff200;
+    }
+    100% {
+        box-shadow: 0 0 8px rgba(255, 255, 0, 0.6), 0 0 12px rgba(255, 255, 0, 0.6);
+        border-color: #fff200;
+    }
+}
+
+.challenge-completed-gold.sparkle {
+    animation: sparkle-glow 2.5s infinite ease-in-out;
+}
+
+.challenge-description {
+    font-size: 12px;
+    font-weight: 750;
+    text-align: left;
+    margin-top: -10px;
+    margin-left: -10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.challenge-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: -10px;
+    gap: 4px;
+
+}
+
+.completed-badge,
+.not-completed-badge {
+    font-size: 9px;
+    padding: 2px 6px;
+    margin: 0;
+    font-weight: 600;
+}
+
+.completed-badge {
+    background-color: #28a745;
+    color: white;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.not-completed-badge {
+    background-color: #dc3545;
+    color: white;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.challenge-points {
+    font-size: 12px;
+    margin: 0;
+    font-weight: 600;
+    color: #004a77;
+}
+
+.challenge-progress-text {
+    font-size: 12px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.time-remaining {
+    font-size: 12px;
+    margin: 0;
+    color: black;
+    font-weight: 500;
+}
+
+.challenge-progress {
+    height: 4px; 
+    width: 100%; 
+    border-radius: 3px;
+    margin: 1px 0 2px 0;
+}
+
+.points-bar {
+    background: white;
+    color: #004a77;
+    border: 3.5px solid #004a77;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+    margin-bottom: 15px;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    transition: transform 0.2s ease-in-out;
+}
+
+.points-bar:hover {
+    transform: scale(1.02);
+}
+
+.challenge-footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    padding: 0;
+    margin-top: 8px;
+    margin-left: -10px;
+}
+
+.challenge-footer-row .challenge-points,
+.challenge-footer-row .time-remaining {
+    margin: 0;
+    font-weight: 600;
+    white-space: nowrap;
+}
+

@@ -10,22 +10,18 @@ import DashboardPage from './components/DashboardPage';
 import FAQPage from './components/FAQPage'; 
 import ResourcesPage from './components/ResourcesPage';  
 import DonatePage from './components/DonatePage';  
-import ProfilePage from './components/ProfilePage';  
-import RewardsPage from './components/RewardsPage';  
-import LeaderboardPage from './components/LeaderboardPage'; 
-
 
 const App = () => {
-  // Lift the username state to App.js
+  //Lift the username state to App.js
   const [username, setUsername] = useState(null);
 
-  // Effect to check localStorage for the username when the component mounts
+  //Effect to check localStorage for the username when the component mounts
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
     if (storedUsername) {
-      setUsername(storedUsername); // Set the username state from localStorage
+      setUsername(storedUsername); //Set the username state from localStorage
     }
-  }, []); // Runs once when the component mounts
+  }, []); //Runs once when the component mounts
 
   return (
     <div className="app-container">
@@ -41,9 +37,6 @@ const App = () => {
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/resources" element={<ResourcesPage />} />
             <Route path="/donate" element={<DonatePage />} />
-            <Route path="/profile" element={<ProfilePage />} /> 
-            <Route path="/rewards" element={<RewardsPage />} /> 
-            <Route path="/leaderboard" element={<LeaderboardPage />} /> 
           </Routes>
         </main>
         <footer>

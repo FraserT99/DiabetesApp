@@ -1,42 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import "../styles/DashboardPage.css"; 
 
-function Dashboard() {
-  const [userData, setUserData] = useState(null);
+const DashboardPage = () => {
+  const [username, setUsername] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/user');
-        if (response.data.success) {
-          setUserData(response.data.user);
-        } else {
-          navigate('/login');
-        }
-      } catch (err) {
-        navigate('/login');
-      }
-    };
-
-    fetchUserData();
+    const storedUsername = localStorage.getItem('username');
+    if (!storedUsername) {
+      navigate('/login'); //Redirect if not logged in
+    } else {
+      setUsername(storedUsername);
+    }
   }, [navigate]);
 
-  if (!userData) {
-    return <div>Loading...</div>;
+  if (!username) {
+    return null; //Prevent rendering until username is set
   }
 
   return (
-    <div>
-      <h2>Welcome, {userData.username}</h2>
-      <p>Your Health Stats:</p>
-      {/* Example of user data */}
-      <p>Blood Glucose Level: {userData.glucoseLevel}</p>
-      <p>Last Update: {userData.lastUpdate}</p>
-      {/* Add more health data as needed */}
+    <div className="dashboard-page">
+      {/* Pass username in the iframe URL */}
+      <iframe
+        src={`http://localhost:5000/dashboard?username=${username}`}
+        title="Diabetes Health Dashboard"
+        sandbox="allow-scripts allow-same-origin allow-forms"
+      />
     </div>
   );
-}
+};
 
-export default Dashboard;
+export default DashboardPage;

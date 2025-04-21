@@ -1,188 +1,93 @@
-/* General Styles for the Register Page */
 .register-page {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Ensure the container takes the full viewport height */
-  padding: 5px 5px; /* Padding to prevent the container from touching the sides */
-  margin-top: 20px; /* Margin at the top to create space between header and form */
-  margin-bottom: 20px; /* Margin at the bottom to create space between footer and form */
+  padding: 20px;
 }
 
 .register-container {
-  background-color: white;
-  padding: 30px 40px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
+  background-color: #fff;
+  padding: 20px;
+  border: 3.5px solid #004a77;
+  border-radius: 16px;
+  height: 535px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
   width: 100%;
-  max-width: 800px; /* Increased max-width for a wider container */
+}
+
+.register-container h2 {
   text-align: center;
-  margin-top: 0; /* No top margin to avoid it being pushed down */
-  border: 3.5px solid #004a77; /* Blue border matching title */
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease; /* Smooth transition */
+  font-size: 32px;
+  margin-bottom: 10px;
+  color: #0d47a1;
 }
 
-.register-container:hover {
-  transform: translateY(-5px); /* Hover effect to lift container */
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Subtle shadow effect */
+.register-form {
+  width: 100%;
 }
 
-/* Register Page Heading */
-h2 {
-  font-size: 28px;
-  color: #333;
-  margin-bottom: 30px; /* Increased space between heading and form */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
 }
 
-/* Form Styling */
 .form-group {
-  margin-bottom: 20px; /* Increased margin for better spacing */
-  text-align: left;
+  display: flex;
+  flex-direction: column;
 }
 
-label {
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px;
+  border: 3px solid #004a77;
+  border-radius: 8px;
   font-size: 14px;
-  font-weight: bold;
-  color: #333;
-  display: block;
-  margin-bottom: 5px;
 }
 
-/* Apply blue border to specific fields (first name, last name, password, and age) */
-input[name="firstName"], 
-input[name="lastName"], 
-input[name="password"], 
-input[name="age"], 
-input#firstName, 
-input#lastName, 
-input#password, 
-input#age {
-  border: 3px solid #004a77; /* Blue border for specific fields */
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8.2px;
 }
 
-/* General Input, Select, and Textarea Fields (apply border if it's not already overridden) */
-input, select, textarea {
-  width: 100%;
-  padding: 12px; /* More padding for a cleaner look */
-  border-radius: 4px;
+.form-submit {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+button[type="submit"] {
+  padding: 12px 28px;
   font-size: 16px;
-  color: #333;
-  margin-bottom: 15px; /* Increased margin between fields */
-  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions for focus state */
-}
-
-/* Focused State for Input Fields */
-input:focus, select:focus, textarea:focus {
-  outline: none;
-  border-color: #0078d7; /* Focused state color */
-  box-shadow: 0 0 5px rgba(0, 120, 215, 0.5); /* Focus shadow */
-}
-
-input, select, textarea {
-  width: 100%;
-  padding: 12px; /* More padding for a cleaner look */
-  border: 3px solid #004a77; /* Blue border matching title */
-  border-radius: 4px;
-  font-size: 16px;
-  color: #333;
-  margin-bottom: 15px; /* Increased margin between fields */
-  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions for focus state */
-}
-
-input:focus, select:focus, textarea:focus {
-  outline: none;
-  border-color: #0078d7; /* Focused state */
-  box-shadow: 0 0 5px rgba(0, 120, 215, 0.5); /* Focus shadow */
-}
-
-/* Custom styling for select fields */
-select {
-  -webkit-appearance: none; /* Remove default dropdown styles */
-  -moz-appearance: none;
-  appearance: none;
-  background-image: url('data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2012%2012%22%20xmlns%3D%22http://www.w3.org/2000/svg%22%3E%3Cpath%20fill%3D%22%23ccc%22%20d%3D%22M9%204l-3%204H3V4H9z%22%3E%3C/path%3E%3C/svg%3E%0A');
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 12px 12px;
-}
-
-/* Button Styling */
-button {
-  width: 100%;
-  padding: 12px;
-  background-color: #0078d7; /* Blue background */
+  margin-top: -20px;
+  background: linear-gradient(to right, #007bff, #004a77);
   color: white;
-  font-size: 16px;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background 0.3s ease;
 }
 
-button:hover {
-  background-color: #005a8a; /* Darker blue on hover */
-  transform: translateY(-2px); /* Slight lift effect */
+button[type="submit"]:hover {
+  background: linear-gradient(to right, #0056b3, #00315c);
 }
 
-/* Success/Error Styling */
 .success {
   color: green;
-  font-size: 14px;
-  margin-top: 10px;
+  text-align: center;
+  margin-top: 15px;
 }
 
 .error {
   color: red;
-  font-size: 14px;
-  margin-top: 10px;
-}
-
-/* Responsive Design for Mobile */
-@media (max-width: 600px) {
-  .register-container {
-    padding: 20px;
-    width: 100%;
-    max-width: 400px; /* Reduce the width on smaller screens */
-  }
-
-  h2 {
-    font-size: 24px; /* Slightly smaller heading for small screens */
-    margin-bottom: 20px; /* Less space between heading and form */
-  }
-
-  .form-group {
-    margin-bottom: 15px; /* Less spacing between form fields */
-  }
-
-  label {
-    font-size: 13px; /* Slightly smaller label font */
-  }
-
-  input, select {
-    font-size: 15px; /* Slightly smaller input text for mobile */
-    padding: 10px;
-  }
-}
-
-/* Specific Customization for Checkboxes */
-input[type="checkbox"] {
-  width: auto;
-  margin-right: 10px;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-input[type="checkbox"]:focus {
-  outline: none;
-  border: none;
-  box-shadow: none;
-}
-
-/* Styling for Labels of Checkbox Inputs */
-.checkbox-label {
-  display: inline-block;
-  font-size: 14px;
-  color: #333;
-  margin-top: 5px;
-  vertical-align: middle;
+  text-align: center;
+  margin-top: 15px;
 }

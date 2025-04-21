@@ -3,131 +3,180 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import login_user
 from models import db
 from models.user import User
-from models.patient import Patient  # Import Patient model for registration
+from models.patient import Patient
+from services.notifications import send_username_email, send_username_sms
+import re
+from datetime import datetime
 
 auth_bp = Blueprint('auth', __name__)
 
-# Route to register a new user
 @auth_bp.route('/api/register', methods=['POST'])
 def register():
-    if request.is_json:
-        data = request.get_json()
+    if not request.is_json:
+        return jsonify({"success": False, "message": "Invalid request format"}), 400
 
-        # Extract required fields from the incoming JSON data
-        first_name = data.get('first_name')
-        last_name = data.get('last_name')
-        password = data.get('password')
-        age = data.get('age')
-        gender = data.get('gender')
-        ethnicity = data.get('ethnicity')
-        diagnosis = data.get('diagnosis')
-        smoking = data.get('smoking')
-        family_history_diabetes = data.get('family_history_diabetes', False)
+    data = request.get_json()
 
-        # Check if all required fields are present
-        if not all([first_name, last_name, password, age, gender, ethnicity, diagnosis is not None, smoking is not None]):
-            return jsonify({"success": False, "message": "Missing required fields"}), 400
+    #Extract fields 
+    first_name = data.get("first_name", "").strip()
+    last_name = data.get("last_name", "").strip()
+    password = data.get("password", "")
+    email = data.get("email", "").strip()
+    phone_number = data.get("phone_number", "").strip()
+    age = data.get("age")
+    gender = data.get("gender")
+    ethnicity = data.get("ethnicity")
+    diagnosis = data.get("diagnosis")
+    smoking = data.get("smoking", False)
+    family_history_diabetes = data.get("family_history_diabetes", False)
 
-        # Create the Patient entry first and save it to the database
-        new_patient = Patient(
-            first_name=first_name,
-            last_name=last_name,
-            age=age,
-            gender=gender,
-            diagnosis=diagnosis,
-            ethnicity=ethnicity,
-            family_history_diabetes=family_history_diabetes,
-            smoking=smoking,
-            alcohol_consumption=0.0,
-            physical_activity=0.0,
-            diet_quality=0.0,
-            sleep_quality=0.0,
-            gestational_diabetes=False,
-            polycystic_ovary_syndrome=False,
-            previous_pre_diabetes=False,
-            hypertension=False,
-            antihypertensive_medications=False,
-            statins=False,
-            antidiabetic_medications=False,
-            medical_checkups_frequency=0.0,
-            medication_adherence=0.0,
-            health_literacy=0.0,
-            latest_blood_pressure_systolic=0,
-            latest_blood_pressure_diastolic=0,
-            latest_bmi=0.0,
-            latest_cholesterol_total=0.0,
-            latest_hba1c=0.0,
-            latest_fasting_blood_sugar=0.0,
-        )
+    #Validate presence of required fields 
+    required_fields = [first_name, last_name, password, email, phone_number, age, gender, ethnicity, diagnosis]
+    if any(field in [None, ""] for field in required_fields):
+        return jsonify({"success": False, "message": "All fields are required."}), 400
 
-        # Add the patient record to the session and commit to get the patient_id
-        db.session.add(new_patient)
-        db.session.commit()  # Patient gets its patient_id assigned now
+    #Field validations 
+    name_regex = re.compile(r"^[A-Za-z]{2,50}$")
+    if not name_regex.match(first_name):
+        return jsonify({"success": False, "message": "First name must contain only letters (2–50 characters)."}), 400
 
-        # Generate the username using the patient's last name and patient_id
-        username = f"{last_name[:3].lower()}{new_patient.patient_id}"
+    if not name_regex.match(last_name):
+        return jsonify({"success": False, "message": "Last name must contain only letters (2–50 characters)."}), 400
 
-        # Check if the username already exists
-        if User.query.filter_by(username=username).first():
-            return jsonify({"success": False, "message": "Username already exists"}), 400
+    password_regex = re.compile(r"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$")
+    if not password_regex.match(password):
+        return jsonify({"success": False, "message": "Password must be 8–20 characters with at least one letter and one number."}), 400
 
-        # Now, create the user and link it to the patient
-        new_user = User(username=username, password=password)  # Plain-text password passed here
-        new_user.patient_id = new_patient.patient_id  # Link patient_id to the user
+    email_regex = re.compile(r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$')
+    if not email_regex.match(email):
+        return jsonify({"success": False, "message": "Invalid email format."}), 400
 
-        # Try to save the user record to the database
-        try:
-            db.session.add(new_user)
-            db.session.commit()
+    phone_regex = re.compile(r'^\+?\d{10,15}$')
+    if not phone_regex.match(phone_number):
+        return jsonify({"success": False, "message": "Invalid phone number format. Must be 10–15 digits."}), 400
 
-            # Print the key details of the new user and patient
-            print(f"[INFO] New User Registered: User ID: {new_user.id}, Username: {new_user.username}, Patient ID: {new_patient.patient_id}, "
-                  f"First Name: {new_patient.first_name}, Last Name: {new_patient.last_name}, Age: {new_patient.age}, "
-                  f"Gender: {new_patient.gender}, Ethnicity: {new_patient.ethnicity}, Diagnosis: {new_patient.diagnosis}, "
-                  f"Smoking: {new_patient.smoking}, Family History of Diabetes: {new_patient.family_history_diabetes}")
+    try:
+        age = int(age)
+        if age < 18 or age > 120:
+            return jsonify({"success": False, "message": "Age must be between 18 and 120."}), 400
+    except ValueError:
+        return jsonify({"success": False, "message": "Age must be a valid number."}), 400
 
-            login_user(new_user)  # Log the user in after registration
+    #Check for duplicate email 
+    if Patient.query.filter_by(email=email).first():
+        return jsonify({"success": False, "message": "Email already registered."}), 400
 
-            # Return success message with the logged-in username
-            return jsonify({
-                "success": True,
-                "message": "Registration successful. User logged in.",
-                "username": new_user.username
-            })
+    #Hash password 
+    hashed_password = generate_password_hash(password)
 
-        except Exception as e:
-            db.session.rollback()  # Rollback in case of an error
-            print(f"[ERROR] {str(e)}")
-            return jsonify({"success": False, "message": "An error occurred during registration"}), 500
+    #Create Patient record 
+    new_patient = Patient(
+        first_name=first_name,
+        last_name=last_name,
+        age=age,
+        gender=gender,
+        diagnosis=diagnosis,
+        ethnicity=ethnicity,
+        smoking=smoking,
+        family_history_diabetes=family_history_diabetes,
+        email=email,
+        phone_number=phone_number,
+        alcohol_consumption=0.0,
+        physical_activity=0.0,
+        diet_quality=0.0,
+        sleep_quality=0.0,
+        gestational_diabetes=False,
+        polycystic_ovary_syndrome=False,
+        previous_pre_diabetes=False,
+        hypertension=False,
+        antihypertensive_medications=False,
+        statins=False,
+        antidiabetic_medications=False,
+        medical_checkups_frequency=0.0,
+        medication_adherence=0.0,
+        health_literacy=0.0,
+        latest_blood_pressure_systolic=0,
+        latest_blood_pressure_diastolic=0,
+        latest_bmi=0.0,
+        latest_cholesterol_total=0.0,
+        latest_hba1c=0.0,
+        latest_fasting_blood_sugar=0.0,
+    )
 
-    # If the request is not JSON, return an error
-    return jsonify({"success": False, "message": "Invalid request"}), 400
+    db.session.add(new_patient)
+    db.session.commit()
 
-# Route for logging in an existing user
+    #Generate username 
+    username = f"{last_name[:3].lower()}{new_patient.patient_id}"
+    if User.query.filter_by(username=username).first():
+        return jsonify({"success": False, "message": "Username already exists."}), 400
+
+    new_user = User(username=username, password=hashed_password)
+    new_user.patient_id = new_patient.patient_id
+
+    try:
+        db.session.add(new_user)
+        db.session.commit()
+
+        print(f"[INFO] New User Registered: Username: {username}, Email: {email}, Phone: {phone_number}")
+        login_user(new_user)
+
+        #Notify 
+        if email:
+            send_username_email(email, username)
+        if phone_number:
+            send_username_sms(phone_number, username)
+
+        return jsonify({
+            "success": True,
+            "message": "Registration successful. User logged in.",
+            "username": username
+        })
+
+    except Exception as e:
+        db.session.rollback()
+        print(f"[ERROR] Registration failed: {str(e)}")
+        return jsonify({"success": False, "message": f"An error occurred during registration: {str(e)}"}), 500
+
+#Route for logging in an existing user
 @auth_bp.route('/api/login', methods=['POST'])
 def login():
     if request.is_json:
         data = request.get_json()
         username = data.get('username')
-        password = data.get('password')  # Plain-text password from the request
+        password = data.get('password')  #Plain-text password from the request
 
         print(f"[DEBUG] Attempting login for username: {username}")
 
-        # Check if the username exists in the database
+        #Check if the user exists in the database
         user = User.query.filter_by(username=username).first()
 
         if user:
             print(f"[DEBUG] Found user: {user.username}")
 
-        # Check if the user exists and if the password matches
+        #Validate the user credentials
         if user and check_password_hash(user.password_hash, password):
             print(f"[DEBUG] Login successful for user: {user.username}")
-            login_user(user)  # Log the user in after successful authentication
-            return jsonify({"success": True, "message": "Login successful", "username": user.username})
+            login_user(user)  #Log the user in after successful authentication
 
-        # If credentials are invalid, return an error
+            #Update last_login timestamp
+            user.last_login = datetime.utcnow()
+            db.session.commit()
+            
+            #Refresh challenge progress after login
+            from services.challenge_service import refresh_all_challenge_progress
+            refresh_all_challenge_progress(user.username)
+            print(f"[CHALLENGES] Refreshed challenge progress for: {user.username}")
+
+            return jsonify({
+                "success": True,
+                "message": "Login successful",
+                "username": user.username
+            })
+
+        #If credentials are invalid, return an error
         print(f"[DEBUG] Invalid credentials provided.")
         return jsonify({"success": False, "message": "Invalid credentials"}), 401
 
-    # If the request is not JSON, return an error
+    #If the request is not JSON, return an error
     return jsonify({"success": False, "message": "Invalid request"}), 400

@@ -1,9 +1,8 @@
-/* General Styles for the Login Page */
 .login-page {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Full height for vertical centering */
+  height: 100vh;
   padding: 20px;
 }
 
@@ -11,11 +10,11 @@
   background-color: white;
   padding: 40px 50px;
   border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 400px; /* Width limit for better design on mobile */
+  max-width: 400px;
   text-align: center;
-  border: 3.5px solid #004a77; /* Blue border for container */
+  border: 3.5px solid #004a77;
 }
 
 h2 {
@@ -38,35 +37,33 @@ label {
 }
 
 input {
-  width: 100%;
   padding: 14px;
   border: 3px solid #004a77;
   border-radius: 8px;
   font-size: 16px;
   color: #333;
-  margin-bottom: 5px; /* Reduced margin to bring the links closer */
+  margin-bottom: 5px;
   outline: none;
-  transition: all 0.3s ease-in-out; /* Smooth transition for focus effect */
+  transition: all 0.3s ease-in-out;
 }
 
-/* Specific Input Fields Styling */
 #username {
-  border: 3px solid #004a77; /* Explicitly apply the border to the username field */
+  border: 3px solid #004a77;
 }
 
 #password {
-  border: 3px solid #004a77; /* Explicitly apply the border to the password field */
+  border: 3px solid #004a77;
 }
 
 input:focus {
-  border-color: #0078d7; /* Focused border */
-  box-shadow: 0 0 5px rgba(0, 120, 215, 0.5); /* Focus shadow */
+  border-color: #0078d7;
+  box-shadow: 0 0 5px rgba(0, 120, 215, 0.5);
 }
 
-button {
+.login_button {
   width: 100%;
   padding: 14px;
-  background: linear-gradient(135deg, #0078d7, #005a8a); /* Gradient background */
+  background: linear-gradient(135deg, #0078d7, #005a8a);
   color: white;
   font-size: 16px;
   border: none;
@@ -76,12 +73,11 @@ button {
 }
 
 button:hover {
-  background: #005a8a; /* Darker blue on hover */
+  background: #005a8a;
 }
 
-/* Forgot Links Styling */
 .forgot-links {
-  margin-top: 0; /* Removed margin to make them closer to the input fields */
+  margin-top: 0;
   text-align: left;
 }
 
@@ -90,14 +86,13 @@ button:hover {
   color: #004a77;
   text-decoration: none;
   display: block;
-  margin-bottom: 5px; /* Reduced space between the links */
+  margin-bottom: 5px;
 }
 
 .forgot-link:hover {
   text-decoration: underline;
 }
 
-/* Error and Success Messages Styling */
 .error {
   color: red;
   font-size: 14px;
@@ -110,7 +105,6 @@ button:hover {
   margin-top: 15px;
 }
 
-/* Responsive Design */
 @media (max-width: 600px) {
   .login-container {
     padding: 20px;

@@ -1,4 +1,3 @@
-/* General Reset and Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -7,84 +6,78 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: #5ab1e8; /* Light background */
-  color: #333; /* Dark text */
+  background-color: #5ab1e8;
+  color: #333;
   line-height: 1.6;
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Ensure body takes full height */
+  min-height: 100vh;
 }
 
-/* Main Section */
 main {
   display: flex;
-  justify-content: center; /* Horizontally center */
-  align-items: center; /* Vertically center */
-  flex: 1; /* Allow it to grow and take available space */
+  justify-content: center;
+  align-items: center;
+  flex: 1;
   padding: 0 20px;
 }
 
-/* Footer Styles */
 footer {
-  background-color: #333; /* Dark footer */
+  background-color: #333;
   color: white;
   text-align: center;
   padding: 10px 0;
   width: 100%;
   font-size: 14px;
-  margin-top: auto; /* Pushes the footer to the bottom of the page */
+  margin-top: auto;
 }
 
-/* Header Styles */
 header {
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Vertically center all elements in the header */
+  align-items: center;
   padding: 10px 20px;
-  background-color: #0078d7; /* Blue background */
+  background-color: #0078d7;
   position: relative;
   width: 100%;
 }
 
-/* Container for the Logo and Title */
 .logo-title-container {
   display: flex;
-  align-items: center; /* Vertically center the logo and title */
-  gap: 10px; /* Add some space between the logo and the title */
+  align-items: center;
+  gap: 10px;
 }
 
 .logo {
-  width: 50px; /* Adjust the logo size */
+  width: 50px;
   height: auto;
 }
 
 .title {
   color: white;
-  font-size: 24px; /* Reverted to 24px */
+  font-size: 24px;
   font-weight: bold;
 }
 
 .slogan {
-  font-size: 0.8rem; /* Smaller font size */
-  font-style: italic; /* Italicized text */
-  color: #f1f1f1; /* Light color to contrast with the title */
-  margin-left: 5px; /* Space between title and slogan */
+  font-size: 0.8rem;
+  font-style: italic;
+  color: #f1f1f1;
+  margin-left: 5px;
 }
 
-/* Container for the "Logged in as" text */
 .username-display {
   color: white;
   font-weight: bold;
-  font-size: 16px; /* Reverted to 16px */
-  margin-left: 20px; /* Space between the logo/title and the username */
+  font-size: 16px;
+  margin-left: 20px;
 }
 
-/* Navigation Links */
 nav {
   display: flex;
-  justify-content: flex-end; /* Align links to the right */
-  align-items: center; /* Vertically center the links */
-  gap: 8px; /* Reduced space between links */
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
 }
 
 nav ul {
@@ -95,44 +88,49 @@ nav ul {
 }
 
 nav ul li {
-  margin: 0 8px; /* Reduced margin to match the gap */
+  margin: 0 8px;
   display: flex;
-  align-items: center; /* Ensure nav links align with the button and title */
+  align-items: center;
 }
 
 nav ul li a {
   text-decoration: none;
   color: white;
   font-weight: bold;
-  padding: 10px; /* Add consistent padding for height consistency */
+  padding: 10px;
 }
 
 nav ul li a:hover {
   text-decoration: underline;
 }
 
-/* Logout button styles */
 .logout-btn {
   background-color: #e63946;
   color: white;
   border: none;
   width: auto;
-  padding: 10px 20px; /* Ensure padding is consistent */
+  padding: 10px 20px;
   cursor: pointer;
-  font-size: 16px; /* Reverted to 16px */
+  font-size: 16px;
   border-radius: 5px;
   display: flex;
-  align-items: center; /* Vertically center the text in the button */
+  align-items: center;
 }
 
 .logout-btn:hover {
   background-color: #d42d37;
 }
 
-/* Ensure the logout button is on the right side */
 .logout-btn-container {
   display: flex;
-  justify-content: flex-end; /* Push logout button to the right */
+  justify-content: flex-end;
   align-items: center;
-  gap: 15px; /* Add space between the logout button and the rest of the elements */
+  gap: 15px;
 }
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+

@@ -1,0 +1,86 @@
+body, .leaderboard-container, .dash-table {
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #5ab1e8, #0078d7);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    border: 3.5px solid #004a77;
+}
+
+.leaderboard-content-container {
+    margin-left: 230px;
+    min-height: 100vh;
+    text-align: center;
+}
+
+.leaderboard-container {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+}
+
+.leaderboard-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #0078d7, #005b9f);
+    padding: 3px 3px;
+    border: 3.5px solid #004a77;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.leaderboard-section-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 0;
+}
+
+.leaderboard-dropdown {
+    width: 150px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 3px solid #000000;
+    background: white;
+}
+
+.dash-table-container {
+    background: white;
+    margin-bottom: 2px;
+    margin-top: -1.5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 3.5px solid #004a77;
+}
+
+.dash-table th {
+    background-color: #004a77 !important;
+    color: white !important;
+    font-size: 16px !important;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+}
+
+.dash-table td {
+    font-size: 15px !important;
+    font-weight: normal;
+    font-family: 'Poppins', sans-serif;
+}
+
+.dash-table-container .gold-row {
+    background-color: #fff8dc !important;
+    font-weight: 600;
+}
+
+.dash-table-container .silver-row {
+    background-color: #f0f0f0 !important;
+    font-weight: 600;
+}
+
+.dash-table-container .bronze-row {
+    background-color: #fce5cd !important;
+    font-weight: 600;
+}
+
