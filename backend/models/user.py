@@ -1,31 +1,17 @@
-#Imports 
 from datetime import datetime
 from werkzeug.security import generate_password_hash
 from flask_login import UserMixin
 from models import db
 
-
-#User Model 
 class User(UserMixin, db.Model):
  
     __tablename__ = 'users'
 
-    #Columns 
-
     id = db.Column(db.Integer, primary_key=True)
-    #Unique identifier for the user.
-
     username = db.Column(db.String(80), unique=True, nullable=False)
-    #Login username (must be unique).
-
     password_hash = db.Column(db.String(200), nullable=False)
-    #Hashed version of the user’s password.
-
     patient_id = db.Column(db.Integer, db.ForeignKey('patients.patient_id'), nullable=True)
-    #Foreign key to the associated patient profile (if applicable).
-
     last_login = db.Column(db.DateTime, default=datetime.utcnow)
-    #Timestamp of the user's last login.
 
     #Relationships 
 

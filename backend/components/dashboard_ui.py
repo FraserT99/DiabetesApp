@@ -1,14 +1,7 @@
-#Dash and Plotly imports for creating interactive components
 from dash import dcc, html
-
-#Bootstrap components for styling and layout
 import dash_bootstrap_components as dbc
-
-#Plotly for graphing and visualization
 import pandas as pd
 import plotly.graph_objects as go
-
-#Importing components and services for sidebar and user data
 from components.sidebar import create_sidebar
 from services.user_service import fetch_user_data, METRIC_LABELS, METRIC_GOAL_BEHAVIOR
 from services.goals_service import get_patient_goals
@@ -164,12 +157,10 @@ def dashboard_page(username):
 
             dbc.Col([
 
-                #Metric Summary
                 dbc.Row([
                     dbc.Col(html.Div(id='summary-container', className="metrics-row"), width=12)
                 ], className="justify-content-center"),
-
-                #Metric Dropdown and Graph
+                
                 dbc.Row([
                     dbc.Col([
                         html.Div([
@@ -201,7 +192,7 @@ def dashboard_page(username):
                     ], width=4),
                 ], className="graph-metric-row"),
 
-                #Goal Donuts Section
+        
                 dbc.Row([
                     dbc.Col([
                         dbc.Card([
@@ -211,7 +202,6 @@ def dashboard_page(username):
                     ], width=12)
                 ]),
 
-                #ROW 1: Streak | Quote | Badge Carousel
                 dbc.Row([
                     dbc.Col(html.Div(id="streak-box"), width=4),
                     dbc.Col(html.Div(id="daily-quote"), width=4),
@@ -221,7 +211,7 @@ def dashboard_page(username):
                 dcc.Interval(id="quote-interval", interval=8000, n_intervals=0),
                 dcc.Interval(id="badge-interval", interval=6000, n_intervals=0),
 
-                #ROW 2: Metric Grid with Time Filter
+
                 dbc.Row([
                     dbc.Col([
                         dbc.Card([
@@ -250,7 +240,6 @@ def dashboard_page(username):
                     ], width=12)
                 ], className="mt-4"),
 
-                #ROW 3: Top 3 Near-Complete Challenges
                 dbc.Row([
                     dbc.Col([
                         dbc.Card([

@@ -58,7 +58,7 @@
 }
 
 .donate-card {
-  width: 50%; /* changed from 70% */
+  width: 50%; 
   background-color: #ffffff;
   padding: 30px;
   border: 3.5px solid #004a77;

@@ -11,7 +11,6 @@ UK_TZ = timezone("Europe/London")
 
 
 #Metric History Fetching
-
 def fetch_metric_history(patient_id, metric_name):
 
     #Query the 5 most recent entries for this metric

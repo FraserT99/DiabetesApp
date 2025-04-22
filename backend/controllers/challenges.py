@@ -12,7 +12,7 @@ from services.challenge_service import (
 from services.user_service import fetch_user_points
 
 
-#Utility: Calculate Time Remaining for Challenges 
+#Calculate Time Remaining for Challenges 
 def calculate_time_remaining(challenge_type):
     
     now = datetime.now()

@@ -83,7 +83,7 @@ def fetch_challenges():
             "description": ch.description,
             "goal": ch.goal,
             "challenge_type": ch.challenge_type,
-            "reward_points": ch.reward_points  #  Include points to be earned
+            "reward_points": ch.reward_points  #Include points to be earned
         } for ch in challenges]
 
     except Exception as e:
@@ -115,13 +115,13 @@ def fetch_patient_progress(username, challenge_id):
             print(f"[ERROR] Challenge ID {challenge_id} not found.")
             return 0
 
-        # Map to health metric and calculate progress
+        #Map to health metric and calculate progress
         metric_name = challenge_to_metric(challenge.name)
         period = challenge.challenge_type
         progress = get_cumulative_metric(patient.patient_id, metric_name, period)
 
         if not patient_challenge and progress >= challenge.goal:
-            #  Mark challenge as completed (one-time creation)
+            #Mark challenge as completed (one-time creation)
             new_challenge = PatientChallenge(
                 patient_id=patient.patient_id,
                 challenge_id=challenge_id,
@@ -214,39 +214,39 @@ def challenge_to_metric(challenge_name):
     Only includes mappings for seeded challenges.
     """
     mapping = {
-        # Daily Challenges
+        #Daily Challenges
         "Daily Steps": "latest_steps_taken",
         "Daily Calories Burned": "latest_calories_burned",
         "Daily Active Time": "latest_active_minutes",
         "Daily Hydration": "latest_water_intake",
 
-        # Weekly Challenges
+        #Weekly Challenges
         "Weekly Steps": "latest_steps_taken",
         "Weekly Calories Burned": "latest_calories_burned",
         "Weekly Distance Walked": "latest_distance_walked",
         "Weekly Running Distance": "latest_distance_ran",
 
-        # Monthly Challenges
+        #Monthly Challenges
         "Monthly Steps": "latest_steps_taken",
         "Monthly Calories Burned": "latest_calories_burned",
         "Monthly Weight Loss": "latest_weight",
         "Monthly Fiber Intake": "latest_fiber_intake"
     }
 
-    return mapping.get(challenge_name, None)  # Returns None if the challenge isn't found
+    return mapping.get(challenge_name, None)  #Returns None if the challenge isn't found
 
 def refresh_all_challenge_progress(username):
     """
     Recalculates all challenge progress for the user.
     Useful for login or first-time session loads.
     """
-    challenges = fetch_challenges()  # Returns list of all defined challenges
+    challenges = fetch_challenges()  #Returns list of all defined challenges
     for challenge in challenges:
         update_challenge_progress(
             username=username,
             challenge_id=challenge["id"],
-            amount=0,  # Doesn't increment anything, just triggers check
-            suppress_completion_logs=True  # Prevent duplicate console logs
+            amount=0,  
+            suppress_completion_logs=True  #Prevent duplicate console logs
         )
 
 def get_nearly_completed_challenges(username, top_n=3):
@@ -259,13 +259,13 @@ def get_nearly_completed_challenges(username, top_n=3):
 
     patient_id = user.patient.patient_id
 
-    # Join PatientChallenge with Challenge to get details
+    #Join PatientChallenge with Challenge to get details
     records = (
         db.session.query(PatientChallenge, Challenge)
         .join(Challenge, PatientChallenge.challenge_id == Challenge.id)
         .filter(PatientChallenge.patient_id == patient_id)
         .filter(PatientChallenge.completed == False)
-        .order_by((PatientChallenge.progress / Challenge.goal).desc())  # closest to complete
+        .order_by((PatientChallenge.progress / Challenge.goal).desc())  
         .limit(top_n)
         .all()
     )

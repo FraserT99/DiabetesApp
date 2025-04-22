@@ -165,7 +165,7 @@ def register_profile_callbacks(dash_app):
                     ], width=12)
                 ]),
 
-                html.Div(style={"height": "5px"}),  #Spacer
+                html.Div(style={"height": "5px"}), 
 
                 #Challenge + Activity Rows
                 dbc.Row([
@@ -244,7 +244,6 @@ def register_profile_callbacks(dash_app):
                                     value=user_data.get("smoking", 0),
                                     className="mb-3"
                                 )
-                                #Add more inputs if needed
                             ], width=6),
                         ]),
 

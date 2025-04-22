@@ -32,7 +32,7 @@ from components.ui_helpers import generate_metric_card
 from components.dashboard_ui import generate_goal_section
 
 
-#App Initialization 
+#App Initialisation 
 def create_dashboard(app):
     """Create and return the Dash dashboard application."""
     dash_app = dash.Dash(

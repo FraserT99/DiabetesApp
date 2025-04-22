@@ -5,7 +5,7 @@ from models.user import User
 from models.patient import Patient
 from models.health_history import HealthHistory
 
-#Centralized Metric Dictionary
+#Centralised Metric Dictionary
 METRIC_LABELS = {
     "latest_fasting_blood_sugar": "Fasting Blood Sugar (mg/dL)",
     "latest_hba1c": "HbA1c Level (%)",
@@ -28,30 +28,30 @@ METRIC_LABELS = {
     "latest_height": "Height (cm)",
 }
 
-#Centralized Metric Units
+#Centralised Metric Units
 METRIC_UNITS = {
-    "latest_fasting_blood_sugar": "mg/dL",      #Fasting Blood Sugar
-    "latest_hba1c": "%",                        #HbA1c Level
-    "latest_bmi": "BMI",                        #Body Mass Index
-    "latest_blood_pressure_systolic": "mmHg",   #Systolic Blood Pressure
-    "latest_calories_consumed": "kcal",         #Calories Consumed
-    "latest_protein_intake": "g",               #Protein Intake
-    "latest_carbs_intake": "g",                 #Carbohydrates Intake
-    "latest_fats_intake": "g",                  #Fats Intake
-    "latest_fiber_intake": "g",                 #Fiber Intake
-    "latest_water_intake": "L",                 #Water Intake
-    "latest_steps_taken": "steps",              #Steps Taken
-    "latest_active_minutes": "minutes",         #Active Minutes
-    "latest_calories_burned": "kcal",           #Calories Burned
-    "latest_distance_walked": "km",             #Distance Walked
-    "latest_workout_sessions": "sessions",      #Workout Sessions
-    "latest_heart_rate": "bpm",                 #Heart Rate
-    "latest_distance_ran": "km",                #Running Distance
-    "latest_weight": "kg",                      #Weight
-    "latest_height": "cm",                      #Height
+    "latest_fasting_blood_sugar": "mg/dL",
+    "latest_hba1c": "%",
+    "latest_bmi": "BMI",
+    "latest_blood_pressure_systolic": "mmHg",
+    "latest_calories_consumed": "kcal",
+    "latest_protein_intake": "g",
+    "latest_carbs_intake": "g",
+    "latest_fats_intake": "g",
+    "latest_fiber_intake": "g",
+    "latest_water_intake": "L",
+    "latest_steps_taken": "steps",
+    "latest_active_minutes": "minutes",
+    "latest_calories_burned": "kcal",
+    "latest_distance_walked": "km",
+    "latest_workout_sessions": "sessions",
+    "latest_heart_rate": "bpm",
+    "latest_distance_ran": "km",
+    "latest_weight": "kg",
+    "latest_height": "cm",
 }
 
-#Centralized Thresholds
+#Centralised Thresholds
 THRESHOLDS = {
     "latest_fasting_blood_sugar": {"normal": (70, 99), "warning": (100, 125), "critical": (126, 400)},
     "latest_hba1c": {"normal": (4.0, 5.6), "warning": (5.7, 6.4), "critical": (6.5, 15)},
@@ -80,11 +80,11 @@ THRESHOLDS = {
 
 GOAL_TYPE_OPTIONS_BY_METRIC = {
     "latest_fasting_blood_sugar": ["daily"],
-    "latest_hba1c": ["monthly"],  #Usually measured monthly or quarterly
+    "latest_hba1c": ["monthly"],  
     "latest_bmi": ["monthly"],
     "latest_blood_pressure_systolic": ["daily"],
     "latest_blood_pressure_diastolic": ["daily"],
-    "latest_cholesterol_total": ["monthly"],  #Often checked every few months
+    "latest_cholesterol_total": ["monthly"],  
 
     "latest_calories_consumed": ["daily", "weekly", "monthly"],
     "latest_protein_intake": ["daily", "weekly"],
@@ -102,7 +102,7 @@ GOAL_TYPE_OPTIONS_BY_METRIC = {
     "latest_distance_ran": ["daily", "weekly", "monthly"],
     
     "latest_weight": ["monthly"],
-    "latest_height": []  #Typically static
+    "latest_height": []  
 }
 
 #Metric behavior for goal tracking

@@ -106,16 +106,7 @@ class Patient(db.Model):
 
     #Methods 
     def update_health_metric(self, metric_name, new_value):
-        """
-        Update a specific health metric and log it to the history.
 
-        Args:
-            metric_name (str): Name of the metric to update (must match a field).
-            new_value (float|int): New metric value.
-
-        Returns:
-            bool: True if updated and logged successfully.
-        """
         previous_value = getattr(self, metric_name, "N/A")
 
         #Create a historical log entry
